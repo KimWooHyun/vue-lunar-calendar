@@ -19,5 +19,20 @@
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^13.0.0",
     "vue-template-compiler": "^2.3.4"
-  }
+  },
+  "name": "vue-lunar-calendar",
+  "description": "A vue component for lunar calendar. Uses Moment.js for date operations.",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KimWooHyun/vue-lunar-calendar.git"
+  },
+  "keywords": ["vue", "calendar", "lunar", "lunar-calendar"],
+  "author": "KimWooHyun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KimWooHyun/vue-lunar-calendar/issues"
+  },
+  "homepage": "https://github.com/KimWooHyun/vue-lunar-calendar#readme"
 }
