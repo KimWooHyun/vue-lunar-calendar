@@ -1,30 +1,21 @@
 <template>
   <div class="date-container">
     <div class="month-year">
-      <button class="month-button month-button-prve" @click.stop.prevent="changeMonth(-1)">
-        <i class="month-arrow month-arrow-prev"></i>
-      </button>
-      <span>
-        <span class="calendar-month">{{dayOfMonth.format('YYYY')}}.{{dayOfMonth.format('MM')}}</span>
-      </span>
+      <button class="month-button month-button-prve" @click.stop.prevent="changeMonth(-1)"><i class="month-arrow month-arrow-prev"></i></button>
+      <span class="calendar-month">{{dayOfMonth.format('YYYY')}}.{{dayOfMonth.format('MM')}}</span>
       <span style="font-size:14px;">
         <input type="checkbox" class="checkbox" v-model="showLunar" id="show-lunar">
         <label for="show-lunar" class="check-lunar">음력</label>
       </span>
-      <button class="month-button month-button-next" @click.stop.prevent="changeMonth(1)">
-        <i class="month-arrow month-arrow-next"></i>
-      </button>
+      <button class="month-button month-button-next" @click.stop.prevent="changeMonth(1)"><i class="month-arrow month-arrow-next"></i></button>
     </div>
-    <div class="week-days">
-      <span v-for="day in weekDays">{{day}}</span>
-    </div>
+    <div class="week-days"><span v-for="day in weekDays">{{day}}</span></div>
     <div class="days">
       <day-cell key="index"
         :showLunar="showLunar"
         :isSelected="isSelected(day)"
-        :isInRange="isInRange(day)"
         :day="day"
-        @dayClick="handleDayClick"å
+        @dayClick="handleDayClick"
         v-for="(day, index) in days"></day-cell>
     </div>
   </div>
@@ -46,21 +37,8 @@
       disableDaysBeforeToday: {
         type: Boolean
       },
-      daysDisabledStart: {
-        type: Object,
-        default: null
-      },
-      daysDisabledEnd: {
-        type: Object,
-        default: null
-      },
-      // the day will be passed as argument to it to decide if it is disabled or not
       disabledFunc: {
         type: Function,
-        default: null
-      },
-      range: {
-        type: Object,
         default: null
       },
       defaultDate: {
@@ -71,18 +49,12 @@
       return {
         weekDays: [],
         days: [],
-        dayOfMonth: moment(), // Any day of current displaying month
+        dayOfMonth: moment(),
         date: this.defaultDate || moment(),
         showLunar: true
       }
     },
     watch: {
-      // if used in DateRange, show month that contains endDate
-      range (val) {
-        this.date = val.endDate
-        this.resetDayOfMonth()
-      },
-      // show month that contains defaultDate
       defaultDate (val) {
         this.date = val
         this.resetDayOfMonth()
@@ -91,9 +63,6 @@
     created () {
       this.initWeekDays()
       this.initDays()
-    },
-    mounted () {
-      // this.initGesture()
     },
     methods: {
       resetDayOfMonth () {
@@ -114,32 +83,23 @@
       },
       initDays () {
         this.days = []
-
         const firstDayOfWeek = this.firstDayOfWeek
         const startOfMonth = this.dayOfMonth.startOf('month').isoWeekday()
         const monthNumber = this.dayOfMonth.month()
         const dayCount = this.dayOfMonth.daysInMonth()
-
         const lastMonth = this.dayOfMonth.clone().month(monthNumber - 1)
         const lastMonthDayCount = lastMonth.daysInMonth()
-
         const nextMonth = this.dayOfMonth.clone().month(monthNumber + 1)
-
-        // Previous month's days
         const diff = (Math.abs(firstDayOfWeek - (startOfMonth + 7)) % 7)
         for (let i = diff - 1; i >= 0; i--) {
           const dayMoment = lastMonth.clone().date(lastMonthDayCount - i)
           this.days.push({dayMoment, isPassive: true})
         }
-
-        // Current month's days
         for (let i = 1; i <= dayCount; i++) {
           const dayMoment = this.dayOfMonth.clone().date(i)
-          var isPassive = this.isPassive(dayMoment)
+          let isPassive = this.isPassive(dayMoment)
           this.days.push({ dayMoment, isPassive })
         }
-
-        // Next month's days
         const remainingCells = 42 - this.days.length // 42cells = 7days * 6rows
         for (let i = 1; i <= remainingCells; i++) {
           const dayMoment = nextMonth.clone().date(i)
@@ -150,47 +110,18 @@
         if (!day.dayMoment) return
         return day.dayMoment.format('YYYY-MM-DD') === this.date.format('YYYY-MM-DD')
       },
-      isInRange (day) {
-        if (this.range && this.range.startDate && this.range.endDate && day && day.dayMoment) {
-          return day.dayMoment.isBetween(this.range['startDate'], this.range['endDate']) ||
-            day.dayMoment.isBetween(this.range['endDate'], this.range['startDate']) ||
-            day.dayMoment.format('YYYY-MM-DD') === this.range['startDate'].format('YYYY-MM-DD') ||
-            day.dayMoment.format('YYYY-MM-DD') === this.range['endDate'].format('YYYY-MM-DD')
-        }
-      },
       isPassive (dayMoment) {
-        var {disableDaysBeforeToday, daysDisabledStart, daysDisabledEnd, disabledFunc} = this
-
-        // use disabledFunc to decide
-        if (disabledFunc) {
-          return disabledFunc(dayMoment)
-        }
-
-        // set days between daysDisabledStart and daysDisabledEnd to isPassive
-        if (daysDisabledStart && daysDisabledEnd) {
-          if (Number(dayMoment.diff(daysDisabledStart, 'days')) >= 0
-            && Number(dayMoment.diff(daysDisabledEnd, 'days')) < 0) {
-            return true
-          }
-        } else if (daysDisabledStart) {
-          if (Number(dayMoment.diff(daysDisabledStart, 'days')) >= 0) {
-            return true
-          }
-        } else if (this.daysDisabledEnd) {
-          if (Number(dayMoment.diff(daysDisabledEnd, 'days')) < 0) {
-            return true
-          }
-        }
-
-        // set days before today to isPassive
-        var _today = moment()
+        let {disableDaysBeforeToday, disabledFunc} = this
+        if (disabledFunc) { return disabledFunc(dayMoment) }
+        let _today = moment()
         if (disableDaysBeforeToday && Number(dayMoment.diff(_today, 'days')) <= -1) {
           return true
         }
       },
-      handleDayClick (day) {
+      handleDayClick (day, lunar) {
         this.date = day.dayMoment
-        this.$emit('change', day.dayMoment)
+        let lunarDate = moment(lunar, "YYYY-MM-DD")
+        this.$emit('change', day.dayMoment, lunarDate)
       },
       changeMonth (delta) {
         this.dayOfMonth.add(delta, 'months')
@@ -201,8 +132,8 @@
 </script>
 <style>
   .container { max-width: 1024px !important; background-color: #fff; padding: 0 0.5rem; background-color: #fff; margin-top: 1rem; }
-  .date-container, .selected-container { margin: 1rem auto; padding: 0 !important; min-width: 300px; max-width: 450px !important; }
-  .month-year { text-align: center; font-size: 1.4rem; height: 4rem; line-height: 4rem; }
+  .date-container, .selected-container { margin: 0 auto; padding: 0px; min-width: 300px; max-width: 450px; }
+  .month-year { text-align: center; height: 4rem; line-height: 4rem; }
   .month-button { display: inline-block; box-sizing: border-box; padding: 0; margin: 0 0.7rem; border: none; outline: none; background-color: #fbfbfb; border-radius: 50%; width: 42px; height: 42px; margin-top: 13px; cursor: pointer; }
   .month-button-prve{ float: left; }
   .month-button-next{ float: right; }
@@ -212,4 +143,8 @@
   .week-days span { padding: 10px 0; display: inline-block; width: 14.28%; text-align: center; font-size: 18px; color: #797979; }
   .calendar-month{ font-size: 36px; margin-left: 40px; text-align: center; color: #818181; }
   .check-lunar{ font-size: 14px; color: #9b9b9b; }
+
+  @media (max-width: 320px) {
+    .calendar-month{ margin-left: 0; line-height: 2; }
+  }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div :class="['ayou-day-cell', isSelected? 'selected': '']" @click.stop.prevent="handleDayClick()" :title="showLunar && lunarText">
     <div class="day-wrapper">
-      <div class="lunar" :class="{'passive': day.isPassive, 'festival': isFestival}">
+      <div class="lunar" :class="{'passive': day.isPassive}">
         <template v-if="showLunar">{{lunarText}}</template>
       </div>
-      <div class="solar" :class="{'selected': isSelected, 'passive': day.isPassive, 'in-range': isInRange, 'without-lunar':!showLunar}">{{day.dayMoment.date()}}</div>
+      <div class="solar" :class="{'selected': isSelected, 'passive': day.isPassive, 'without-lunar':!showLunar}">{{day.dayMoment.date()}}</div>
     </div>
   </div>
 </template>
@@ -23,10 +23,6 @@
       isSelected: {
         type: Boolean,
         default: false
-      },
-      isInRange: {
-        type: Boolean,
-        default: false
       }
     },
     mixins: [Transformer],
@@ -43,7 +39,7 @@
     methods: {
       handleDayClick () {
         if (this.day.isPassive) return
-        this.$emit('dayClick', this.day)
+        this.$emit('dayClick', this.day, this.lunar.day)
       },
       convertLunar (day) {
         return this.solar2lunar(day.dayMoment._d)
@@ -51,13 +47,7 @@
     },
     computed: {
       lunarText () {
-        return this.lunar && (this.lunar.calendarFestivals || this.lunar.lunarFestivals || this.lunar.Term || this.lunar.IDayCn)
-      },
-      isFestival () {
-        if (this.lunar && (this.lunar.calendarFestivals || this.lunar.lunarFestivals || this.lunar.Term)) {
-          return true
-        }
-        return false
+        return this.lunar && (this.lunar.dayTxt)
       }
     }
   }
@@ -72,9 +62,11 @@
   .solar.passive{ color: #cccccc; }
   .solar.passive.selected{ opacity: 0.4; }
   .lunar{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px; text-align: left; }
-  .lunar.festival.passive{ opacity: 0.4; }
   .without-lunar{ margin-top: 1px; }
 
+  @media (max-width: 320px) {
+    .ayou-day-cell { width: 13.63%; }
+  }
   @media (min-width: 768px) {
     .solar { width: 34%; padding: 0px; font-size: 16px; margin: 5px 5px 0px 0px; }
     .lunar { width: 66%; margin-top: 4px; }

@@ -10,86 +10,36 @@
     </head>
     <body>
       <div id="app">
+        <div style="margin: 0 auto; text-align: center;">
+          <span v-if="solarDate">양력 : {{solarDate}}</span><span v-if="lunarDate">, 음력 : {{lunarDate}}</span>
+        </div>
         <calendar
           @change="onChange"
-          :lang="lang"
           :first-day-of-week="parseInt(firstDayOfWeek)"
           :disable-days-before-today="disableDaysBeforeToday"
-          :days-disabled-start="daysDisabledStart"
-          :days-disabled-end="daysDisabledEnd"
           :default-date="defaultDate"></calendar>
       </div>
       <script>
-      Vue.component('calendar', Calendar)
-      new Vue({
+        Vue.component('calendar', Calendar)
+        new Vue({
           el: '#app',
           data() {
             return {
-              date: moment().format('YYYY-MM-DD'),
+              solarDate: '',
+              lunarDate: '',
               showCalendar: true,
               disableDaysBeforeToday: false,
-              daysDisabledStart: null,
-              daysDisabledEnd: null,
               defaultDate: null,
-              defaultRange: null,
               firstDayOfWeek: 0,
-              lang: 'en'
             };
           },
-          watch: {
-            disableDaysBeforeToday: function () {
-              this.resetComp()
-            },
-            firstDayOfWeek: function () {
-              this.resetComp()
-            },
-            lang: function () {
-              this.resetComp()
-            },
-            daysDisabledStart: function () {
-              this.resetComp()
-            },
-            daysDisabledEnd: function () {
-              this.resetComp()
-            },
-            defaultDate: function () {
-              this.resetComp()
-            },
-            defaultRange: function () {
-              this.resetComp()
-            }
-          },
           methods: {
-            resetComp () {
-              var vm = this
-              this.showCalendar = !this.showCalendar
-              this.$nextTick(function () {
-                vm.showCalendar = !vm.showCalendar
-              })
-            },
-            onChange (data) {
-              if (data.startDate) {
-                this.date = data.startDate.format('YYYY-MM-DD') + '~' + data.endDate.format('YYYY-MM-DD')
-              } else {
-                this.date = data.format('YYYY-MM-DD')
-              }
-            },
-            daysDisabledStartChange (data) {
-              this.daysDisabledStart = data
-            },
-            daysDisabledEndChange (data) {
-              this.daysDisabledEnd = data
-            },
-            defaultDateChange (data) {
-              this.defaultDate = data
-            },
-            defaultRangeChange (data) {
-              this.defaultRange = data
-            },
+            onChange (solarDate, lunarDate) {
+              this.solarDate = solarDate.format('YYYY-MM-DD')
+              this.lunarDate = lunarDate.format('YYYY-MM-DD')
+            }
           }
         })
       </script>
     </body>
 </html>
-
-
