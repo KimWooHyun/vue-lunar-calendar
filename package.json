@@ -8,7 +8,6 @@
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
     "css-loader": "^0.28.4",
-    "eslint-loader": "^1.9.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
@@ -28,7 +27,12 @@
     "type": "git",
     "url": "git+https://github.com/KimWooHyun/vue-lunar-calendar.git"
   },
-  "keywords": ["vue", "calendar", "lunar", "lunar-calendar"],
+  "keywords": [
+    "vue",
+    "calendar",
+    "lunar",
+    "lunar-calendar"
+  ],
   "author": "KimWooHyun",
   "license": "ISC",
   "bugs": {
