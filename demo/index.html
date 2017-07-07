@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>      
+      <script src="https://unpkg.com/vue/dist/vue.js"></script>
+      <script src="../dist/vue-lunar-calendar.min.js"></script>
+    </head>
+    <body>
+      <div id="app">
+        <WTF></WTF>
+      </div>
+      <script>
+      new Vue({
+          el: '#app',
+          components: {
+            'wtf': WTF
+          },
+          data() {
+            return {
+              date: moment().format('YYYY-MM-DD'),
+              showCalendar: true,
+              disableDaysBeforeToday: false,
+              daysDisabledStart: null,
+              daysDisabledEnd: null,
+              defaultDate: null,
+              defaultRange: null,
+              firstDayOfWeek: 0,
+              lang: 'en'
+            };
+          },
+          watch: {
+            disableDaysBeforeToday: function () {
+              this.resetComp()
+            },
+            firstDayOfWeek: function () {
+              this.resetComp()
+            },
+            lang: function () {
+              this.resetComp()
+            },
+            daysDisabledStart: function () {
+              this.resetComp()
+            },
+            daysDisabledEnd: function () {
+              this.resetComp()
+            },
+            defaultDate: function () {
+              this.resetComp()
+            },
+            defaultRange: function () {
+              this.resetComp()
+            }
+          },
+          methods: {
+            resetComp () {
+              var vm = this
+              this.showCalendar = !this.showCalendar
+              this.$nextTick(function () {
+                vm.showCalendar = !vm.showCalendar
+              })
+            },
+            onChange (data) {
+              if (data.startDate) {
+                this.date = data.startDate.format('YYYY-MM-DD') + '~' + data.endDate.format('YYYY-MM-DD')
+              } else {
+                this.date = data.format('YYYY-MM-DD')
+              }
+            },
+            daysDisabledStartChange (data) {
+              this.daysDisabledStart = data
+            },
+            daysDisabledEndChange (data) {
+              this.daysDisabledEnd = data
+            },
+            defaultDateChange (data) {
+              this.defaultDate = data
+            },
+            defaultRangeChange (data) {
+              this.defaultRange = data
+            },
+          }
+        })
+      </script>
+    </body>
+</html>
+
+
