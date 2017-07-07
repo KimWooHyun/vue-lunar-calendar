@@ -32,7 +32,7 @@ new Vue({
 
 # Props
 | Property | Desc | Type | Default values |
-| ---------- | :--------- | :----------: | :----------: |
+| :---------- | :--------- | :----------: | :----------: |
 | firstDayOfWeek    | Set the first day of Week       | Number       | 0 ( sunday )       |
 | disableDaysBeforeToday    | Disable days before today or not       | Boolean       |  -      |
 | disabledFunc    | Use to decide if the day is disabled or not.       | Function       | null       |
@@ -41,5 +41,5 @@ new Vue({
 
 # Event
 | Event | Desc | params |
-| ---------- | :----------: | :----------: |
+| :---------- | :---------- | :----------: |
 | change    | Emit when cell is clicked       | Function       |
