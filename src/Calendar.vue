@@ -4,7 +4,7 @@
       <button class="month-button month-button-prve" @click.stop.prevent="changeMonth(-1)"><i class="month-arrow month-arrow-prev"></i></button>
       <span class="calendar-month">{{dayOfMonth.format('YYYY')}}.{{dayOfMonth.format('MM')}}</span>
       <span style="font-size:14px;">
-        <input type="checkbox" class="checkbox" v-model="showLunar" id="show-lunar">
+        <input type="checkbox" class="checkbox" v-model="isLunar" id="show-lunar">
         <label for="show-lunar" class="check-lunar">음력</label>
       </span>
       <button class="month-button month-button-next" @click.stop.prevent="changeMonth(1)"><i class="month-arrow month-arrow-next"></i></button>
@@ -12,7 +12,7 @@
     <div class="week-days"><span v-for="day in weekDays">{{day}}</span></div>
     <div class="days">
       <day-cell key="index"
-        :showLunar="showLunar"
+        :showLunar="isLunar"
         :isSelected="isSelected(day)"
         :day="day"
         @dayClick="handleDayClick"
@@ -43,6 +43,10 @@
       },
       defaultDate: {
         type: Object
+      },
+      showLunar: {
+        type:Boolean,
+        default: false
       }
     },
     data () {
@@ -51,7 +55,7 @@
         days: [],
         dayOfMonth: moment(),
         date: this.defaultDate || moment(),
-        showLunar: true
+        isLunar: this.showLunar
       }
     },
     watch: {
