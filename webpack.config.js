@@ -6,7 +6,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'vue-lunar-calendar.min.js',
-    library: 'WTF',
     libraryTarget: 'umd'
   },
   module: {
