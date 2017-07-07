@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <title>음력 달력</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>      
       <script src="https://unpkg.com/vue/dist/vue.js"></script>
       <script src="../dist/vue-lunar-calendar.min.js"></script>
     </head>
     <body>
       <div id="app">
-        <WTF></WTF>
+        <calendar
+          @change="onChange"
+          :lang="lang"
+          :first-day-of-week="parseInt(firstDayOfWeek)"
+          :disable-days-before-today="disableDaysBeforeToday"
+          :days-disabled-start="daysDisabledStart"
+          :days-disabled-end="daysDisabledEnd"
+          :default-date="defaultDate"></calendar>
       </div>
       <script>
+      Vue.component('calendar', Calendar)
       new Vue({
           el: '#app',
-          components: {
-            'wtf': WTF
-          },
           data() {
             return {
               date: moment().format('YYYY-MM-DD'),
