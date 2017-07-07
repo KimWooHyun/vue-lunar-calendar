@@ -6,6 +6,7 @@ Uses Moment.js for date operations.
 * [demo](https://kimwoohyun.github.io/vue-lunar-calendar/)
 
 # Install
+`npm install vue-lunar-calendar`
 
 # Usage
 1. import your project
