@@ -1,15 +1,15 @@
 <template>
-  <div class="ayou-calendar">
+  <div class="date-container">
     <div class="month-year">
       <button class="month-button month-button-prve" @click.stop.prevent="changeMonth(-1)">
         <i class="month-arrow month-arrow-prev"></i>
       </button>
       <span>
-        <span style="font-size: 36px;margin-left: 40px;">{{dayOfMonth.format('YYYY')}}.{{dayOfMonth.format('MM')}}</span>
+        <span class="calendar-month">{{dayOfMonth.format('YYYY')}}.{{dayOfMonth.format('MM')}}</span>
       </span>
       <span style="font-size:14px;">
         <input type="checkbox" class="checkbox" v-model="showLunar" id="show-lunar">
-        <label for="show-lunar">음력</label>
+        <label for="show-lunar" class="check-lunar">음력</label>
       </span>
       <button class="month-button month-button-next" @click.stop.prevent="changeMonth(1)">
         <i class="month-arrow month-arrow-next"></i>
@@ -20,13 +20,12 @@
     </div>
     <div class="days">
       <day-cell key="index"
-                :showLunar="showLunar"
-                :isSelected="isSelected(day)"
-                :isInRange="isInRange(day)"
-                :day="day"
-                @dayClick="handleDayClick"
-                v-for="(day, index) in days">
-      </day-cell>
+        :showLunar="showLunar"
+        :isSelected="isSelected(day)"
+        :isInRange="isInRange(day)"
+        :day="day"
+        @dayClick="handleDayClick"å
+        v-for="(day, index) in days"></day-cell>
     </div>
   </div>
 </template>
@@ -201,60 +200,16 @@
   }
 </script>
 <style>
-
-  .ayou-calendar {
-    background-color: #fff;
-    .month-year {
-      text-align: center;
-      font-size: 1.4rem;
-      height: 4rem;
-      line-height: 4rem;
-      .month-button {
-        display: inline-block;
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0 0.7rem;
-        border: none;
-        outline: none;
-        background-color: #fbfbfb;
-        border-radius: 50%;
-        width: 42px;
-        height: 42px;
-        margin-top: 13px;
-      }
-      .month-button-prve{
-        float: left;
-      }
-      .month-button-next{
-        float: right;
-      }
-      .month-arrow {
-        display: inline-block;
-        height: 100%;
-        line-height: 100%;
-        border-top: 2px solid @primary;
-        width: 10px;
-        height: 10px;
-        &.month-arrow-prev {
-          border-left: 2px solid @primary;
-          transform: rotate(-45deg);
-          margin-left: 4px;
-        }
-        &.month-arrow-next {
-          border-right: 2px solid @primary;
-          transform: rotate(45deg);
-          margin-right: 2px;
-        }
-      }
-    }
-    .week-days {
-      span {
-        padding: 10px 0;
-        display: inline-block;
-        font-size: 1rem;
-        width: 14.28%;
-        text-align: center;
-      }
-    }
-  }
+  .container { max-width: 1024px !important; background-color: #fff; padding: 0 0.5rem; background-color: #fff; margin-top: 1rem; }
+  .date-container, .selected-container { margin: 1rem auto; padding: 0 !important; min-width: 300px; max-width: 450px !important; }
+  .month-year { text-align: center; font-size: 1.4rem; height: 4rem; line-height: 4rem; }
+  .month-button { display: inline-block; box-sizing: border-box; padding: 0; margin: 0 0.7rem; border: none; outline: none; background-color: #fbfbfb; border-radius: 50%; width: 42px; height: 42px; margin-top: 13px; cursor: pointer; }
+  .month-button-prve{ float: left; }
+  .month-button-next{ float: right; }
+  .month-arrow { display: inline-block; height: 100%; line-height: 100%; border-top: 2px solid #bebebe; width: 10px; height: 10px; }
+  .month-arrow-prev { border-left: 2px solid #bebebe; transform: rotate(-45deg); margin-left: 4px; }
+  .month-arrow-next { border-right: 2px solid #bebebe; transform: rotate(45deg); margin-right: 2px; }
+  .week-days span { padding: 10px 0; display: inline-block; width: 14.28%; text-align: center; font-size: 18px; color: #797979; }
+  .calendar-month{ font-size: 36px; margin-left: 40px; text-align: center; color: #818181; }
+  .check-lunar{ font-size: 14px; color: #9b9b9b; }
 </style>
