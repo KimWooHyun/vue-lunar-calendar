@@ -20,9 +20,12 @@
           :default-date="defaultDate"></calendar>
       </div>
       <script>
-        Vue.component('calendar', Calendar)
+        // Vue.component('calendar', Calendar)
         new Vue({
           el: '#app',
+          components: {
+            'calendar': Calendar
+          },
           data() {
             return {
               solarDate: '',
