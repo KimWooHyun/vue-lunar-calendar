@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>음력 달력</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>      
+      <script src="https://unpkg.com/vue/dist/vue.js"></script>
+      <script src="dist/vue-lunar-calendar.min.js"></script>
+    </head>
+    <body>
+      <div id="app">
+        <div style="margin: 0 auto; text-align: center;">
+          <span v-if="solarDate">양력 : {{solarDate}}</span><span v-if="lunarDate">, 음력 : {{lunarDate}}</span>
+        </div>
+        <calendar
+          @change="onChange"
+          :first-day-of-week="parseInt(firstDayOfWeek)"
+          :disable-days-before-today="disableDaysBeforeToday"
+          :default-date="defaultDate"></calendar>
+      </div>
+      <script>
+        Vue.component('calendar', Calendar)
+        new Vue({
+          el: '#app',
+          data() {
+            return {
+              solarDate: '',
+              lunarDate: '',
+              showCalendar: true,
+              disableDaysBeforeToday: false,
+              defaultDate: null,
+              firstDayOfWeek: 0,
+            };
+          },
+          methods: {
+            onChange (solarDate, lunarDate) {
+              this.solarDate = solarDate.format('YYYY-MM-DD')
+              this.lunarDate = lunarDate.format('YYYY-MM-DD')
+            }
+          }
+        })
+      </script>
+    </body>
+</html>
