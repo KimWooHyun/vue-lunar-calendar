@@ -44,3 +44,6 @@ new Vue({
 | Event | Desc | params |
 | :---------- | :---------- | :----------: |
 | change    | Emit when cell is clicked       | Function       |
+
+# Thanks for
+@[ClaudeSeo](https://github.com/ClaudeSeo)
