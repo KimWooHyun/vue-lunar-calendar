@@ -52,7 +52,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .ayou-day-cell{ margin: 1px; width: 13.73%; height: 60px; display: inline-block; text-align: center; background-color: #fbfbfb; }
   .ayou-day-cell.selected{ background-color: #222944; color: #fff; }
   .ayou-day-cell:hover{ cursor: pointer; }

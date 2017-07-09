@@ -134,8 +134,7 @@
     }
   }
 </script>
-<style>
-  .container { max-width: 1024px !important; background-color: #fff; padding: 0 0.5rem; background-color: #fff; margin-top: 1rem; }
+<style scoped>
   .date-container, .selected-container { margin: 0 auto; padding: 0px; min-width: 300px; max-width: 450px; }
   .month-year { text-align: center; height: 4rem; line-height: 4rem; }
   .month-button { display: inline-block; box-sizing: border-box; padding: 0; margin: 0 0.7rem; border: none; outline: none; background-color: #fbfbfb; border-radius: 50%; width: 42px; height: 42px; margin-top: 13px; cursor: pointer; }
