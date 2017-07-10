@@ -61,7 +61,7 @@
   .solar.selected{ color: #ffffff; }
   .solar.passive{ color: #cccccc; }
   .solar.passive.selected{ opacity: 0.4; }
-  .lunar{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px; text-align: left; }
+  .lunar{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px 3px; text-align: left; }
   .without-lunar{ margin-top: 1px; }
 
   @media (max-width: 320px) {

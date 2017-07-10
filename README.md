@@ -37,9 +37,11 @@ new Vue({
 <template>
   <lunar-calendar
     @change="onChange"
-    :first-day-of-week="parseInt(firstDayOfWeek)"
-    :disable-days-before-today="disableDaysBeforeToday"
-    :default-date="defaultDate"></lunar-calendar>
+    :firstDayOfWeek="parseInt(firstDayOfWeek)"
+    :disableDaysBeforeToday="disableDaysBeforeToday"
+    :defaultDate="defaultDate"
+    :showLunarButton="showLunarButton"
+  ></lunar-calendar>
 </template>
 ```
 
@@ -51,6 +53,7 @@ new Vue({
 | disabledFunc    | Use to decide if the day is disabled or not.       | Function       | null       |
 | defaultDate    | Init the selected date       | Object       | -       |
 | showLunar    | show or hide lunar       | Boolean       | false       |
+| showLunarButton    | show or hide lunar check button      | Boolean       | true       |
 
 # Event
 | Event | Desc | params |

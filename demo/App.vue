@@ -5,9 +5,11 @@
     </div>
     <lunar-calendar
       @change="onChange"
-      :first-day-of-week="parseInt(firstDayOfWeek)"
-      :disable-days-before-today="disableDaysBeforeToday"
-      :default-date="defaultDate"></lunar-calendar>
+      :firstDayOfWeek="parseInt(firstDayOfWeek)"
+      :disableDaysBeforeToday="disableDaysBeforeToday"
+      :defaultDate="defaultDate"
+      :showLunarButton="showLunarButton"
+    ></lunar-calendar>
   </div>
 </template>
 <script>
@@ -20,13 +22,17 @@ export default {
       showCalendar: true,
       disableDaysBeforeToday: false,
       defaultDate: null,
-      firstDayOfWeek: 0
+      firstDayOfWeek: 0,
+      showLunar: false,
+      isLunarChecked: false,
+      showLunarButton: true
     };
   },
   methods: {
-    onChange (solarDate, lunarDate) {
+    onChange (solarDate, lunarDate, isLunarChecked) {
       this.solarDate = solarDate.format('YYYY-MM-DD')
       this.lunarDate = lunarDate.format('YYYY-MM-DD')
+      this.isLunarChecked = isLunarChecked
     }
   },
   components: {

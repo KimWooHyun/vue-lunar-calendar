@@ -3,7 +3,7 @@
     <div class="month-year">
       <button class="month-button month-button-prve" @click.stop.prevent="changeMonth(-1)"><i class="month-arrow month-arrow-prev"></i></button>
       <span class="calendar-month">{{dayOfMonth.format('YYYY')}}.{{dayOfMonth.format('MM')}}</span>
-      <span style="font-size:14px;">
+      <span style="font-size:14px;" v-if="showLunarButton">
         <input type="checkbox" class="checkbox" v-model="isLunar" id="show-lunar">
         <label for="show-lunar" class="check-lunar">음력</label>
       </span>
@@ -47,6 +47,10 @@
       showLunar: {
         type:Boolean,
         default: false
+      },
+      showLunarButton: {
+        type:Boolean,
+        default: true
       }
     },
     data () {
@@ -125,7 +129,7 @@
       handleDayClick (day, lunar) {
         this.date = day.dayMoment
         let lunarDate = moment(lunar, "YYYY-MM-DD")
-        this.$emit('change', day.dayMoment, lunarDate)
+        this.$emit('change', day.dayMoment, lunarDate, this.isLunar)
       },
       changeMonth (delta) {
         this.dayOfMonth.add(delta, 'months')

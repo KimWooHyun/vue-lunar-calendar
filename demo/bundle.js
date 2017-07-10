@@ -23472,6 +23472,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -23482,13 +23484,17 @@ if (false) {(function () {
       showCalendar: true,
       disableDaysBeforeToday: false,
       defaultDate: null,
-      firstDayOfWeek: 0
+      firstDayOfWeek: 0,
+      showLunar: false,
+      isLunarChecked: false,
+      showLunarButton: true
     };
   },
   methods: {
-    onChange(solarDate, lunarDate) {
+    onChange(solarDate, lunarDate, isLunarChecked) {
       this.solarDate = solarDate.format('YYYY-MM-DD');
       this.lunarDate = lunarDate.format('YYYY-MM-DD');
+      this.isLunarChecked = isLunarChecked;
     }
   },
   components: {
@@ -23699,6 +23705,10 @@ module.exports = function listToStyles (parentId, list) {
     showLunar: {
       type: Boolean,
       default: false
+    },
+    showLunarButton: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -23779,7 +23789,7 @@ module.exports = function listToStyles (parentId, list) {
     handleDayClick(day, lunar) {
       this.date = day.dayMoment;
       let lunarDate = __WEBPACK_IMPORTED_MODULE_0_moment___default.a(lunar, "YYYY-MM-DD");
-      this.$emit('change', day.dayMoment, lunarDate);
+      this.$emit('change', day.dayMoment, lunarDate, this.isLunar);
     },
     changeMonth(delta) {
       this.dayOfMonth.add(delta, 'months');
@@ -24156,7 +24166,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 13.73%; height: 60px; display: inline-block; text-align: center; background-color: #fbfbfb;\n}\n.ayou-day-cell.selected[data-v-2d0706a4]{ background-color: #222944; color: #fff;\n}\n.ayou-day-cell[data-v-2d0706a4]:hover{ cursor: pointer;\n}\n.day-wrapper[data-v-2d0706a4]{ width: 100%;\n}\n.solar[data-v-2d0706a4]{ text-align: right; color: #797979; padding: 10px 5px 0px 0px; font-size: 23px; font-weight: 300;\n}\n.solar.selected[data-v-2d0706a4]{ color: #ffffff;\n}\n.solar.passive[data-v-2d0706a4]{ color: #cccccc;\n}\n.solar.passive.selected[data-v-2d0706a4]{ opacity: 0.4;\n}\n.lunar[data-v-2d0706a4]{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px; text-align: left;\n}\n.without-lunar[data-v-2d0706a4]{ margin-top: 1px;\n}\n@media (max-width: 320px) {\n.ayou-day-cell[data-v-2d0706a4] { width: 13.63%;\n}\n}\n@media (min-width: 768px) {\n.solar[data-v-2d0706a4] { width: 34%; padding: 0px; font-size: 16px; margin: 5px 5px 0px 0px;\n}\n.lunar[data-v-2d0706a4] { width: 66%; margin-top: 4px;\n}\n.day-wrapper[data-v-2d0706a4]{ display: inline-flex;\n}\n}\n", ""]);
+exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 13.73%; height: 60px; display: inline-block; text-align: center; background-color: #fbfbfb;\n}\n.ayou-day-cell.selected[data-v-2d0706a4]{ background-color: #222944; color: #fff;\n}\n.ayou-day-cell[data-v-2d0706a4]:hover{ cursor: pointer;\n}\n.day-wrapper[data-v-2d0706a4]{ width: 100%;\n}\n.solar[data-v-2d0706a4]{ text-align: right; color: #797979; padding: 10px 5px 0px 0px; font-size: 23px; font-weight: 300;\n}\n.solar.selected[data-v-2d0706a4]{ color: #ffffff;\n}\n.solar.passive[data-v-2d0706a4]{ color: #cccccc;\n}\n.solar.passive.selected[data-v-2d0706a4]{ opacity: 0.4;\n}\n.lunar[data-v-2d0706a4]{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px 3px; text-align: left;\n}\n.without-lunar[data-v-2d0706a4]{ margin-top: 1px;\n}\n@media (max-width: 320px) {\n.ayou-day-cell[data-v-2d0706a4] { width: 13.63%;\n}\n}\n@media (min-width: 768px) {\n.solar[data-v-2d0706a4] { width: 34%; padding: 0px; font-size: 16px; margin: 5px 5px 0px 0px;\n}\n.lunar[data-v-2d0706a4] { width: 66%; margin-top: 4px;\n}\n.day-wrapper[data-v-2d0706a4]{ display: inline-flex;\n}\n}\n", ""]);
 
 // exports
 
@@ -24410,7 +24420,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "month-arrow month-arrow-prev"
   })]), _vm._v(" "), _c('span', {
     staticClass: "calendar-month"
-  }, [_vm._v(_vm._s(_vm.dayOfMonth.format('YYYY')) + "." + _vm._s(_vm.dayOfMonth.format('MM')))]), _vm._v(" "), _c('span', {
+  }, [_vm._v(_vm._s(_vm.dayOfMonth.format('YYYY')) + "." + _vm._s(_vm.dayOfMonth.format('MM')))]), _vm._v(" "), (_vm.showLunarButton) ? _c('span', {
     staticStyle: {
       "font-size": "14px"
     }
@@ -24452,7 +24462,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "for": "show-lunar"
     }
-  }, [_vm._v("음력")])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("음력")])]) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "month-button month-button-next",
     on: {
       "click": function($event) {
@@ -24510,9 +24520,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.solarDate) ? _c('span', [_vm._v("양력 : " + _vm._s(_vm.solarDate))]) : _vm._e(), (_vm.lunarDate) ? _c('span', [_vm._v(", 음력 : " + _vm._s(_vm.lunarDate))]) : _vm._e()]), _vm._v(" "), _c('lunar-calendar', {
     attrs: {
-      "first-day-of-week": parseInt(_vm.firstDayOfWeek),
-      "disable-days-before-today": _vm.disableDaysBeforeToday,
-      "default-date": _vm.defaultDate
+      "firstDayOfWeek": parseInt(_vm.firstDayOfWeek),
+      "disableDaysBeforeToday": _vm.disableDaysBeforeToday,
+      "defaultDate": _vm.defaultDate,
+      "showLunarButton": _vm.showLunarButton
     },
     on: {
       "change": _vm.onChange
