@@ -13,18 +13,18 @@
         <div style="margin: 0 auto; text-align: center;">
           <span v-if="solarDate">양력 : {{solarDate}}</span><span v-if="lunarDate">, 음력 : {{lunarDate}}</span>
         </div>
-        <calendar
+        <lunar-calendar
           @change="onChange"
           :first-day-of-week="parseInt(firstDayOfWeek)"
           :disable-days-before-today="disableDaysBeforeToday"
-          :default-date="defaultDate"></calendar>
+          :default-date="defaultDate"></lunar-calendar>
       </div>
       <script>
-        // Vue.component('calendar', Calendar)
+        // Vue.component('lunar-calendar', lunarCalendar)
         new Vue({
           el: '#app',
           components: {
-            'calendar': Calendar
+            'lunar-calendar': lunarCalendar
           },
           data() {
             return {

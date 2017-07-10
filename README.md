@@ -6,28 +6,34 @@ Uses Moment.js for date operations.
 * [demo](https://kimwoohyun.github.io/vue-lunar-calendar/)
 
 # Install
-`npm install vue-lunar-calendar`
+`npm install vue-lunar-calendar --save`
 
 # Usage
 1. import your project
 ```
-Vue.component('calendar', Calendar)
+import lunarCalendar from 'vue-lunar-calendar'
+```
+
+2. Declare to component your project
+```
+Vue.component('lunar-calendar', lunarCalendar)
 ```
 or
 ```
 new Vue({
-	components: {'calendar': Calendar}
+	components: {'lunar-calendar': lunarCalendar}
+	// or components: {lunarCalendar}
 })
 ```
 
-2. use in your project.
+3. use in your project.
 ```
 <template>
-	<calendar
+	<lunar-calendar
 		@change="onChange"
     	:first-day-of-week="parseInt(firstDayOfWeek)"
     	:disable-days-before-today="disableDaysBeforeToday"
-    	:default-date="defaultDate"></calendar>
+    	:default-date="defaultDate"></lunar-calendar>
 </template>
 ```
 

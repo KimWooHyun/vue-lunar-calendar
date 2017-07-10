@@ -1,2 +1,2 @@
-import {default as Calendar} from "./Calendar.vue";
-export {Calendar}
+import lunarCalendar from './Calendar.vue'
+module.exports = lunarCalendar
