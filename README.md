@@ -1,3 +1,7 @@
+[![npm](https://img.shields.io/npm/v/vue-lunar-calendar.svg)]()
+[![npm](https://img.shields.io/npm/dt/vue-lunar-calendar.svg)]()
+[![npm](https://img.shields.io/npm/l/vue-lunar-calendar.svg)]()
+
 # vue-lunar-calendar
 A vue component for lunar calendar.
 Uses Moment.js for date operations.
