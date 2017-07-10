@@ -33,7 +33,7 @@ module.exports = {
                 browsers: ['last 2 versions']
               }
             }
-          ]]
+          ],['es2015', {'modules': false}]]
         }
     }
     ]
