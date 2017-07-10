@@ -23487,7 +23487,7 @@ if (false) {(function () {
       firstDayOfWeek: 0,
       showLunar: false,
       isLunarChecked: false,
-      showLunarButton: true
+      showLunarButton: false
     };
   },
   methods: {
@@ -23717,7 +23717,8 @@ module.exports = function listToStyles (parentId, list) {
       days: [],
       dayOfMonth: __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
       date: this.defaultDate || __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
-      isLunar: this.showLunar
+      isLunar: this.showLunar,
+      isShowLunarButton: this.showLunarButton
     };
   },
   watch: {
@@ -24420,7 +24421,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "month-arrow month-arrow-prev"
   })]), _vm._v(" "), _c('span', {
     staticClass: "calendar-month"
-  }, [_vm._v(_vm._s(_vm.dayOfMonth.format('YYYY')) + "." + _vm._s(_vm.dayOfMonth.format('MM')))]), _vm._v(" "), (_vm.showLunarButton) ? _c('span', {
+  }, [_vm._v(_vm._s(_vm.dayOfMonth.format('YYYY')) + "." + _vm._s(_vm.dayOfMonth.format('MM')))]), _vm._v(" "), (_vm.isShowLunarButton) ? _c('span', {
     staticStyle: {
       "font-size": "14px"
     }
