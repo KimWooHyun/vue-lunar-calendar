@@ -23487,7 +23487,7 @@ if (false) {(function () {
       firstDayOfWeek: 0,
       showLunar: false,
       isLunarChecked: false,
-      showLunarButton: false
+      showLunarButton: true
     };
   },
   methods: {
