@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 119);
+/******/ 	return __webpack_require__(__webpack_require__.s = 120);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1896,7 +1896,7 @@ function loadLocale(name) {
             module && module.exports) {
         try {
             oldLocale = globalLocale._abbr;
-            __webpack_require__(132)("./" + name);
+            __webpack_require__(135)("./" + name);
             // because defineLocale currently also sets the global locale, we
             // want to undo that for lazy loaded locales
             getSetGlobalLocale(oldLocale);
@@ -4531,107 +4531,10 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(131)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(134)(module)))
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports) {
 
 /*
@@ -4713,7 +4616,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -4732,7 +4635,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(129)
+var listToStyles = __webpack_require__(127)
 
 /*
 type StyleObject = {
@@ -4929,6 +4832,103 @@ function applyToTag (styleElement, obj) {
       styleElement.removeChild(styleElement.firstChild)
     }
     styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
   }
 }
 
@@ -16020,11 +16020,134 @@ return zhTw;
 "use strict";
 
 
-var _vue = __webpack_require__(120);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// 1881-2050
+var Transformer = {
+  proivateData: {
+    MonthTable: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    LunarTable: ["1212122322121", "1212121221220", "1121121222120", "2112132122122", "2112112121220", "2121211212120", "2212321121212", "2122121121210", "2122121212120", "1232122121212", "1212121221220", "1121123221222", "1121121212220", "1212112121220", "2121231212121", "2221211212120", "1221212121210", "2123221212121", "2121212212120", "1211212232212", "1211212122210", "2121121212220", "1212132112212", "2212112112210", "2212211212120", "1221412121212", "1212122121210", "2112212122120", "1231212122212", "1211212122210", "2121123122122", "2121121122120", "2212112112120", "2212231212112", "2122121212120", "1212122121210", "2132122122121", "2112121222120", "1211212322122", "1211211221220", "2121121121220", "2122132112122", "1221212121120", "2121221212110", "2122321221212", "1121212212210", "2112121221220", "1231211221222", "1211211212220", "1221123121221", "2221121121210", "2221212112120", "1221241212112", "1212212212120", "1121212212210", "2114121212221", "2112112122210", "2211211412212", "2211211212120", "2212121121210", "2212214112121", "2122122121120", "1212122122120", "1121412122122", "1121121222120", "2112112122120", "2231211212122", "2121211212120", "2212121321212", "2122121121210", "2122121212120", "1212142121212", "1211221221220", "1121121221220", "2114112121222", "1212112121220", "2121211232122", "1221211212120", "1221212121210", "2121223212121", "2121212212120", "1211212212210", "2121321212221", "2121121212220", "1212112112210", "2223211211221", "2212211212120", "1221212321212", "1212122121210", "2112212122120", "1211232122212", "1211212122210", "2121121122210", "2212312112212", "2212112112120", "2212121232112", "2122121212110", "2212122121210", "2112124122121", "2112121221220", "1211211221220", "2121321122122", "2121121121220", "2122112112322", "1221212112120", "1221221212110", "2122123221212", "1121212212210", "2112121221220", "1211231212222", "1211211212220", "1221121121220", "1223212112121", "2221212112120", "1221221232112", "1212212122120", "1121212212210", "2112132212221", "2112112122210", "2211211212210", "2221321121212", "2212121121210", "2212212112120", "1232212122112", "1212122122120", "1121212322122", "1121121222120", "2112112122120", "2211231212122", "2121211212120", "2122121121210", "2124212112121", "2122121212120", "1212121223212", "1211212221220", "1121121221220", "2112132121222", "1212112121220", "2121211212120", "2122321121212", "1221212121210", "2121221212120", "1232121221212", "1211212212210", "2121123212221", "2121121212220", "1212112112220", "1221231211221", "2212211211220", "1212212121210", "2123212212121", "2112122122120", "1211212322212", "1211212122210", "2121121122120", "2212114112122", "2212112112120", "2212121211210", "2212232121211", "2122122121210", "2112122122120", "1231212122212", "1211211221220", "2121121321222", "2121121121220", "2122112112120", "2122141211212", "1221221212110", "2121221221210", "2114121221221"],
+    lunarDate: {
+      year: 1,
+      month: 0,
+      day: 1,
+      isYunMonth: false
+    },
+    temp: 1
+  },
+  methods: {
+    solar2lunar: function solar2lunar(d) {
+      var yun = this.SolarToLunar(d);
+      return {
+        'day': yun.year + "-" + (yun.month + 1) + "-" + yun.day,
+        'dayTxt': (yun.isYunMonth ? "윤" : '음') + (yun.month + 1) + "." + yun.day
+      };
+    },
+    totalDays: function totalDays(solar_date) {
+      var transData = this.$options.proivateData;
+
+      if (solar_date.getFullYear() % 4 == 0 && solar_date.getFullYear() % 100 != 0 || solar_date.getFullYear() % 400 == 0) {
+        transData.MonthTable[1] = 29;
+      } else {
+        transData.MonthTable[1] = 28;
+      }
+      var sum = 0;
+      for (var i = 0; i < solar_date.getMonth(); i++) {
+        sum = sum + transData.MonthTable[i];
+      }
+
+      var nYears366 = parseInt((solar_date.getFullYear() - 1) / 4) - parseInt((solar_date.getFullYear() - 1) / 100) + parseInt((solar_date.getFullYear() - 1) / 400);
+      var tdays = (solar_date.getFullYear() - 1) * 365 + sum + nYears366 + solar_date.getDate() - 1;
+
+      return tdays;
+    },
+    nDaysYear: function nDaysYear(year) {
+      var transData = this.$options.proivateData;
+      var sum = 0;
+      for (var i = 0; i < 13; i++) {
+        if (parseInt(transData.LunarTable[year - 1881].charAt(i))) {
+          sum += 29 + (parseInt(transData.LunarTable[year - 1881].charAt(i)) + 1) % 2;
+        }
+      }
+      return sum;
+    },
+    nDaysMonth: function nDaysMonth(lunar_date) {
+      var transData = this.$options.proivateData;
+      var yun = 0;
+      if (!(lunar_date.month <= this.YunMonth(lunar_date.year) && !lunar_date.isYunMonth)) {
+        yun = 1;
+      }
+      var nDays = 29 + (parseInt(transData.LunarTable[lunar_date.year - 1881].charAt(lunar_date.month + yun)) + 1) % 2;
+      return nDays;
+    },
+    YunMonth: function YunMonth(year) {
+      var transData = this.$options.proivateData;
+      var yun = 0;
+      do {
+        if (transData.LunarTable[year - 1881].charAt(yun) > 2) {
+          break;
+        }
+        yun++;
+      } while (yun <= 12);
+      return yun - 1;
+    },
+    SolarToLunar: function SolarToLunar(solar_date) {
+      var transData = this.$options.proivateData;
+      var nDays = this.totalDays(solar_date) - 686685;
+      var tmp = 0;
+
+      transData.lunarDate.year = 1881;
+      transData.lunarDate.month = 0;
+      transData.lunarDate.day = 1;
+      transData.lunarDate.isYunMonth = false;
+
+      do {
+        tmp = nDays;
+        nDays -= this.nDaysYear(transData.lunarDate.year);
+        if (nDays < 0) {
+          nDays = tmp;
+          break;
+        }
+        transData.lunarDate.year++;
+      } while (true);
+
+      do {
+        tmp = nDays;
+        nDays -= this.nDaysMonth(transData.lunarDate);
+        if (nDays < 0) {
+          nDays = tmp;
+          break;
+        }
+
+        if (transData.lunarDate.month == this.YunMonth(transData.lunarDate.year) && !transData.lunarDate.isYunMonth) {
+          transData.lunarDate.isYunMonth = true;
+        } else {
+          transData.lunarDate.month++;
+          transData.lunarDate.isYunMonth = false;
+        }
+      } while (true);
+
+      transData.lunarDate.day = nDays + 1;
+      return transData.lunarDate;
+    }
+  }
+};
+
+exports.default = Transformer;
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vue = __webpack_require__(121);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _App = __webpack_require__(123);
+var _App = __webpack_require__(124);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -16042,7 +16165,7 @@ new _vue2.default({
 });
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23184,10 +23307,10 @@ setTimeout(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Vue$3);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(121), __webpack_require__(122)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(122), __webpack_require__(123)))
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -23377,7 +23500,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 var g;
@@ -23404,23 +23527,27 @@ module.exports = g;
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6c28590a_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6c28590a_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(142);
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(125)
+}
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
 
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-6c28590a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -23454,12 +23581,91 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 124 */
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(126);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("64c53a00", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6c28590a\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./App.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6c28590a\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./App.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\ninput[data-v-6c28590a]{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px;\n}\n.btn-search[data-v-6c28590a], .btn-search[data-v-6c28590a]:hover, .btn-search[data-v-6c28590a]:focus{ height: 35px; background-color: #222944; border: 1px solid #222944; color: #fff; padding-bottom: 2px; cursor: pointer;\n}\n.contents-div[data-v-6c28590a]{ margin-bottom: 20px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_src___ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_src___ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_src____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_src___);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -23487,7 +23693,8 @@ if (false) {(function () {
       firstDayOfWeek: 0,
       showLunar: false,
       isLunarChecked: false,
-      showLunarButton: true
+      showLunarButton: true,
+      inputDate: ''
     };
   },
   methods: {
@@ -23495,6 +23702,9 @@ if (false) {(function () {
       this.solarDate = solarDate.format('YYYY-MM-DD');
       this.lunarDate = lunarDate.format('YYYY-MM-DD');
       this.isLunarChecked = isLunarChecked;
+    },
+    searchDate() {
+      this.defaultDate = this.inputDate;
     }
   },
   components: {
@@ -23503,7 +23713,7 @@ if (false) {(function () {
 });
 
 /***/ }),
-/* 125 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23513,7 +23723,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Calendar = __webpack_require__(126);
+var _Calendar = __webpack_require__(130);
 
 var _Calendar2 = _interopRequireDefault(_Calendar);
 
@@ -23522,19 +23732,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _Calendar2.default;
 
 /***/ }),
-/* 126 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Calendar_vue__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_784e67de_node_modules_vue_loader_lib_selector_type_template_index_0_Calendar_vue__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Calendar_vue__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_784e67de_node_modules_vue_loader_lib_selector_type_template_index_0_Calendar_vue__ = __webpack_require__(141);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(127)
+  __webpack_require__(131)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
@@ -23576,17 +23786,17 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 127 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(128);
+var content = __webpack_require__(132);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("d23c06fe", content, false);
+var update = __webpack_require__(2)("d23c06fe", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -23602,10 +23812,10 @@ if(false) {
 }
 
 /***/ }),
-/* 128 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(undefined);
+exports = module.exports = __webpack_require__(1)(undefined);
 // imports
 
 
@@ -23616,46 +23826,15 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
 
 
 /***/ }),
-/* 129 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-/* 130 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DayCell_vue__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DayCell_vue__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lunar__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lunar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__lunar__);
 //
 //
 //
@@ -23678,6 +23857,7 @@ module.exports = function listToStyles (parentId, list) {
 //
 //
 //
+
 
 
 
@@ -23700,7 +23880,7 @@ module.exports = function listToStyles (parentId, list) {
       default: null
     },
     defaultDate: {
-      type: Object
+      type: String
     },
     showLunar: {
       type: Boolean,
@@ -23711,25 +23891,33 @@ module.exports = function listToStyles (parentId, list) {
       default: true
     }
   },
+  mixins: [__WEBPACK_IMPORTED_MODULE_2__lunar___default.a],
   data() {
     return {
       weekDays: [],
       days: [],
       dayOfMonth: __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
-      date: this.defaultDate || __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
+      date: this.defaultDate ? __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.defaultDate, 'YYYY-MM-DD') : __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
+      lunarDate: this.defaultDate ? this.solar2lunar(this.defaultDate) : this.solar2lunar(__WEBPACK_IMPORTED_MODULE_0_moment___default.a()._d),
       isLunar: this.showLunar,
       isShowLunarButton: this.showLunarButton
     };
   },
   watch: {
     defaultDate(val) {
-      this.date = val;
+      this.date = __WEBPACK_IMPORTED_MODULE_0_moment___default.a(val, 'YYYY-MM-DD');
+      this.lunarDate = __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD');
       this.resetDayOfMonth();
+      this.$emit('change', this.date, this.lunarDate, this.isLunar);
+    },
+    showLunarButton(val) {
+      this.isShowLunarButton = val;
     }
   },
   created() {
     this.initWeekDays();
     this.initDays();
+    this.resetDayOfMonth();
   },
   methods: {
     resetDayOfMonth() {
@@ -23800,7 +23988,7 @@ module.exports = function listToStyles (parentId, list) {
 });
 
 /***/ }),
-/* 131 */
+/* 134 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -23828,7 +24016,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 132 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -24077,21 +24265,21 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 132;
+webpackContext.id = 135;
 
 /***/ }),
-/* 133 */
+/* 136 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_DayCell_vue__ = __webpack_require__(136);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2d0706a4_node_modules_vue_loader_lib_selector_type_template_index_0_DayCell_vue__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_DayCell_vue__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2d0706a4_node_modules_vue_loader_lib_selector_type_template_index_0_DayCell_vue__ = __webpack_require__(140);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(134)
+  __webpack_require__(137)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
@@ -24133,17 +24321,17 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 134 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(135);
+var content = __webpack_require__(138);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("c705a48e", content, false);
+var update = __webpack_require__(2)("c705a48e", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -24159,10 +24347,10 @@ if(false) {
 }
 
 /***/ }),
-/* 135 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(undefined);
+exports = module.exports = __webpack_require__(1)(undefined);
 // imports
 
 
@@ -24173,11 +24361,11 @@ exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 
 
 
 /***/ }),
-/* 136 */
+/* 139 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lunar__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lunar__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lunar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__lunar__);
 //
 //
@@ -24234,130 +24422,7 @@ exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 
 });
 
 /***/ }),
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// 1881-2050
-var Transformer = {
-  proivateData: {
-    MonthTable: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-    LunarTable: ["1212122322121", "1212121221220", "1121121222120", "2112132122122", "2112112121220", "2121211212120", "2212321121212", "2122121121210", "2122121212120", "1232122121212", "1212121221220", "1121123221222", "1121121212220", "1212112121220", "2121231212121", "2221211212120", "1221212121210", "2123221212121", "2121212212120", "1211212232212", "1211212122210", "2121121212220", "1212132112212", "2212112112210", "2212211212120", "1221412121212", "1212122121210", "2112212122120", "1231212122212", "1211212122210", "2121123122122", "2121121122120", "2212112112120", "2212231212112", "2122121212120", "1212122121210", "2132122122121", "2112121222120", "1211212322122", "1211211221220", "2121121121220", "2122132112122", "1221212121120", "2121221212110", "2122321221212", "1121212212210", "2112121221220", "1231211221222", "1211211212220", "1221123121221", "2221121121210", "2221212112120", "1221241212112", "1212212212120", "1121212212210", "2114121212221", "2112112122210", "2211211412212", "2211211212120", "2212121121210", "2212214112121", "2122122121120", "1212122122120", "1121412122122", "1121121222120", "2112112122120", "2231211212122", "2121211212120", "2212121321212", "2122121121210", "2122121212120", "1212142121212", "1211221221220", "1121121221220", "2114112121222", "1212112121220", "2121211232122", "1221211212120", "1221212121210", "2121223212121", "2121212212120", "1211212212210", "2121321212221", "2121121212220", "1212112112210", "2223211211221", "2212211212120", "1221212321212", "1212122121210", "2112212122120", "1211232122212", "1211212122210", "2121121122210", "2212312112212", "2212112112120", "2212121232112", "2122121212110", "2212122121210", "2112124122121", "2112121221220", "1211211221220", "2121321122122", "2121121121220", "2122112112322", "1221212112120", "1221221212110", "2122123221212", "1121212212210", "2112121221220", "1211231212222", "1211211212220", "1221121121220", "1223212112121", "2221212112120", "1221221232112", "1212212122120", "1121212212210", "2112132212221", "2112112122210", "2211211212210", "2221321121212", "2212121121210", "2212212112120", "1232212122112", "1212122122120", "1121212322122", "1121121222120", "2112112122120", "2211231212122", "2121211212120", "2122121121210", "2124212112121", "2122121212120", "1212121223212", "1211212221220", "1121121221220", "2112132121222", "1212112121220", "2121211212120", "2122321121212", "1221212121210", "2121221212120", "1232121221212", "1211212212210", "2121123212221", "2121121212220", "1212112112220", "1221231211221", "2212211211220", "1212212121210", "2123212212121", "2112122122120", "1211212322212", "1211212122210", "2121121122120", "2212114112122", "2212112112120", "2212121211210", "2212232121211", "2122122121210", "2112122122120", "1231212122212", "1211211221220", "2121121321222", "2121121121220", "2122112112120", "2122141211212", "1221221212110", "2121221221210", "2114121221221"],
-    lunarDate: {
-      year: 1,
-      month: 0,
-      day: 1,
-      isYunMonth: false
-    },
-    temp: 1
-  },
-  methods: {
-    solar2lunar: function solar2lunar(d) {
-      var yun = this.SolarToLunar(d);
-      return {
-        'day': yun.year + "-" + (yun.month + 1) + "-" + yun.day,
-        'dayTxt': (yun.isYunMonth ? "윤" : '음') + (yun.month + 1) + "." + yun.day
-      };
-    },
-    totalDays: function totalDays(solar_date) {
-      var transData = this.$options.proivateData;
-
-      if (solar_date.getFullYear() % 4 == 0 && solar_date.getFullYear() % 100 != 0 || solar_date.getFullYear() % 400 == 0) {
-        transData.MonthTable[1] = 29;
-      } else {
-        transData.MonthTable[1] = 28;
-      }
-      var sum = 0;
-      for (var i = 0; i < solar_date.getMonth(); i++) {
-        sum = sum + transData.MonthTable[i];
-      }
-
-      var nYears366 = parseInt((solar_date.getFullYear() - 1) / 4) - parseInt((solar_date.getFullYear() - 1) / 100) + parseInt((solar_date.getFullYear() - 1) / 400);
-      var tdays = (solar_date.getFullYear() - 1) * 365 + sum + nYears366 + solar_date.getDate() - 1;
-
-      return tdays;
-    },
-    nDaysYear: function nDaysYear(year) {
-      var transData = this.$options.proivateData;
-      var sum = 0;
-      for (var i = 0; i < 13; i++) {
-        if (parseInt(transData.LunarTable[year - 1881].charAt(i))) {
-          sum += 29 + (parseInt(transData.LunarTable[year - 1881].charAt(i)) + 1) % 2;
-        }
-      }
-      return sum;
-    },
-    nDaysMonth: function nDaysMonth(lunar_date) {
-      var transData = this.$options.proivateData;
-      var yun = 0;
-      if (!(lunar_date.month <= this.YunMonth(lunar_date.year) && !lunar_date.isYunMonth)) {
-        yun = 1;
-      }
-      var nDays = 29 + (parseInt(transData.LunarTable[lunar_date.year - 1881].charAt(lunar_date.month + yun)) + 1) % 2;
-      return nDays;
-    },
-    YunMonth: function YunMonth(year) {
-      var transData = this.$options.proivateData;
-      var yun = 0;
-      do {
-        if (transData.LunarTable[year - 1881].charAt(yun) > 2) {
-          break;
-        }
-        yun++;
-      } while (yun <= 12);
-      return yun - 1;
-    },
-    SolarToLunar: function SolarToLunar(solar_date) {
-      var transData = this.$options.proivateData;
-      var nDays = this.totalDays(solar_date) - 686685;
-      var tmp = 0;
-
-      transData.lunarDate.year = 1881;
-      transData.lunarDate.month = 0;
-      transData.lunarDate.day = 1;
-      transData.lunarDate.isYunMonth = false;
-
-      do {
-        tmp = nDays;
-        nDays -= this.nDaysYear(transData.lunarDate.year);
-        if (nDays < 0) {
-          nDays = tmp;
-          break;
-        }
-        transData.lunarDate.year++;
-      } while (true);
-
-      do {
-        tmp = nDays;
-        nDays -= this.nDaysMonth(transData.lunarDate);
-        if (nDays < 0) {
-          nDays = tmp;
-          break;
-        }
-
-        if (transData.lunarDate.month == this.YunMonth(transData.lunarDate.year) && !transData.lunarDate.isYunMonth) {
-          transData.lunarDate.isYunMonth = true;
-        } else {
-          transData.lunarDate.month++;
-          transData.lunarDate.isYunMonth = false;
-        }
-      } while (true);
-
-      transData.lunarDate.day = nDays + 1;
-      return transData.lunarDate;
-    }
-  }
-};
-
-exports.default = Transformer;
-
-/***/ }),
-/* 138 */
+/* 140 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24399,7 +24464,7 @@ if (false) {
 }
 
 /***/ }),
-/* 139 */
+/* 141 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24505,7 +24570,7 @@ if (false) {
 }
 
 /***/ }),
-/* 140 */
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24519,7 +24584,36 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "margin": "0 auto",
       "text-align": "center"
     }
-  }, [(_vm.solarDate) ? _c('span', [_vm._v("양력 : " + _vm._s(_vm.solarDate))]) : _vm._e(), (_vm.lunarDate) ? _c('span', [_vm._v(", 음력 : " + _vm._s(_vm.lunarDate))]) : _vm._e()]), _vm._v(" "), _c('lunar-calendar', {
+  }, [_c('div', {
+    staticClass: "contents-div"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.inputDate),
+      expression: "inputDate"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "1996-11-05"
+    },
+    domProps: {
+      "value": (_vm.inputDate)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.inputDate = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn-search",
+    on: {
+      "click": _vm.searchDate
+    }
+  }, [_vm._v("Search")])]), _vm._v(" "), _c('div', {
+    staticClass: "contents-div"
+  }, [(_vm.solarDate) ? _c('span', [_vm._v("양력 : " + _vm._s(_vm.solarDate))]) : _vm._e(), (_vm.lunarDate) ? _c('span', [_vm._v(", 음력 : " + _vm._s(_vm.lunarDate))]) : _vm._e()])]), _vm._v(" "), _c('lunar-calendar', {
     attrs: {
       "firstDayOfWeek": parseInt(_vm.firstDayOfWeek),
       "disableDaysBeforeToday": _vm.disableDaysBeforeToday,

@@ -51,7 +51,7 @@ new Vue({
 | firstDayOfWeek    | Set the first day of Week       | Number       | 0 ( sunday )       |
 | disableDaysBeforeToday    | Disable days before today or not       | Boolean       |  -      |
 | disabledFunc    | Use to decide if the day is disabled or not.       | Function       | null       |
-| defaultDate    | Init the selected date       | Object       | -       |
+| defaultDate    | Init the selected date       | String       | -       |
 | showLunar    | show or hide lunar       | Boolean       | false       |
 | showLunarButton    | show or hide lunar check button      | Boolean       | true       |
 

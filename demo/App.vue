@@ -1,7 +1,13 @@
 <template>
   <div id="demo">
     <div style="margin: 0 auto; text-align: center;">
-      <span v-if="solarDate">양력 : {{solarDate}}</span><span v-if="lunarDate">, 음력 : {{lunarDate}}</span>
+      <div class="contents-div">
+        <input type="text" v-model="inputDate" placeholder="1996-11-05">
+        <button @click="searchDate" class="btn-search">Search</button>
+      </div>
+      <div class="contents-div">
+        <span v-if="solarDate">양력 : {{solarDate}}</span><span v-if="lunarDate">, 음력 : {{lunarDate}}</span>
+      </div>
     </div>
     <lunar-calendar
       @change="onChange"
@@ -25,7 +31,8 @@ export default {
       firstDayOfWeek: 0,
       showLunar: false,
       isLunarChecked: false,
-      showLunarButton: true
+      showLunarButton: true,
+      inputDate: ''
     };
   },
   methods: {
@@ -33,6 +40,9 @@ export default {
       this.solarDate = solarDate.format('YYYY-MM-DD')
       this.lunarDate = lunarDate.format('YYYY-MM-DD')
       this.isLunarChecked = isLunarChecked
+    },
+    searchDate () {
+      this.defaultDate = this.inputDate
     }
   },
   components: {
@@ -40,3 +50,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+input{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px; }
+.btn-search, .btn-search:hover, .btn-search:focus{ height: 35px; background-color: #222944; border: 1px solid #222944; color: #fff; padding-bottom: 2px; cursor: pointer; }
+.contents-div{ margin-bottom: 20px; }
+</style>
+

@@ -23,6 +23,7 @@
 <script type="text/ecmascript-6">
   import moment from 'moment'
   import DayCell from './DayCell.vue'
+  import Transformer from './lunar'
 
   export default {
     name: 'lunar-calendar',
@@ -42,7 +43,7 @@
         default: null
       },
       defaultDate: {
-        type: Object
+        type: String
       },
       showLunar: {
         type:Boolean,
@@ -53,25 +54,33 @@
         default: true
       }
     },
+    mixins: [Transformer],
     data () {
       return {
         weekDays: [],
         days: [],
         dayOfMonth: moment(),
-        date: this.defaultDate || moment(),
+        date: this.defaultDate ? moment(this.defaultDate, 'YYYY-MM-DD') : moment(),
+        lunarDate: this.defaultDate ? this.solar2lunar(this.defaultDate) : this.solar2lunar(moment()._d),
         isLunar: this.showLunar,
         isShowLunarButton: this.showLunarButton
       }
     },
     watch: {
       defaultDate (val) {
-        this.date = val
+        this.date = moment(val, 'YYYY-MM-DD')
+        this.lunarDate = moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD')
         this.resetDayOfMonth()
+        this.$emit('change', this.date, this.lunarDate, this.isLunar)
+      },
+      showLunarButton (val) {
+        this.isShowLunarButton = val
       }
     },
     created () {
       this.initWeekDays()
       this.initDays()
+      this.resetDayOfMonth()
     },
     methods: {
       resetDayOfMonth () {
