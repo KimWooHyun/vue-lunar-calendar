@@ -23898,7 +23898,7 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
       days: [],
       dayOfMonth: __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
       date: this.defaultDate ? __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.defaultDate, 'YYYY-MM-DD') : __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
-      lunarDate: this.defaultDate ? this.solar2lunar(this.defaultDate) : this.solar2lunar(__WEBPACK_IMPORTED_MODULE_0_moment___default.a()._d),
+      lunarDate: this.date ? __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD') : __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(__WEBPACK_IMPORTED_MODULE_0_moment___default.a()._d), 'YYYY-MM-DD'),
       isLunar: this.showLunar,
       isShowLunarButton: this.showLunarButton
     };

@@ -61,7 +61,7 @@
         days: [],
         dayOfMonth: moment(),
         date: this.defaultDate ? moment(this.defaultDate, 'YYYY-MM-DD') : moment(),
-        lunarDate: this.defaultDate ? this.solar2lunar(this.defaultDate) : this.solar2lunar(moment()._d),
+        lunarDate: this.date ? moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD') : moment(this.solar2lunar(moment()._d), 'YYYY-MM-DD'),
         isLunar: this.showLunar,
         isShowLunarButton: this.showLunarButton
       }
