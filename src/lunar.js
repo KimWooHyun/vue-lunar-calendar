@@ -50,7 +50,8 @@ let Transformer = {
       let yun = this.SolarToLunar(d)
       return {
         'day': yun.year + "-" + (yun.month + 1) + "-" + yun.day,
-        'dayTxt': (yun.isYunMonth ? "윤" : '음') + (yun.month + 1) + "." + yun.day
+        'dayTxt': (yun.month + 1) + "." + yun.day,
+        'isYunMonth': yun.isYunMonth
       }
     },
     totalDays(solar_date) {

@@ -10,6 +10,7 @@
 </template>
 <script type="text/ecmascript-6">
   import Transformer from './lunar'
+  import Translation from './lang'
 
   export default {
     props: {
@@ -23,17 +24,25 @@
       isSelected: {
         type: Boolean,
         default: false
+      },
+      lang: {
+        type: String,
+        default: 'ko'
       }
     },
     mixins: [Transformer],
     data () {
       return {
-        lunar: this.convertLunar(this.day)
+        lunar: this.convertLunar(this.day),
+        lan: this.lang
       }
     },
     watch: {
       day (val) {
         this.lunar = this.convertLunar(val)
+      },
+      lang (val) {
+        this.lan = val
       }
     },
     methods: {
@@ -47,7 +56,7 @@
     },
     computed: {
       lunarText () {
-        return this.lunar && (this.lunar.dayTxt)
+        return this.lunar && ((this.lunar.isYunMonth ? Translation.translations[this.lan].leap : Translation.translations[this.lan].lunarShort) + this.lunar.dayTxt)
       }
     }
   }

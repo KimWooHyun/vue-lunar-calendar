@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 120);
+/******/ 	return __webpack_require__(__webpack_require__.s = 121);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1896,7 +1896,7 @@ function loadLocale(name) {
             module && module.exports) {
         try {
             oldLocale = globalLocale._abbr;
-            __webpack_require__(135)("./" + name);
+            __webpack_require__(136)("./" + name);
             // because defineLocale currently also sets the global locale, we
             // want to undo that for lazy loaded locales
             getSetGlobalLocale(oldLocale);
@@ -4531,7 +4531,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(134)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(135)(module)))
 
 /***/ }),
 /* 1 */
@@ -4635,7 +4635,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(127)
+var listToStyles = __webpack_require__(128)
 
 /*
 type StyleObject = {
@@ -16041,7 +16041,8 @@ var Transformer = {
       var yun = this.SolarToLunar(d);
       return {
         'day': yun.year + "-" + (yun.month + 1) + "-" + yun.day,
-        'dayTxt': (yun.isYunMonth ? "윤" : '음') + (yun.month + 1) + "." + yun.day
+        'dayTxt': yun.month + 1 + "." + yun.day,
+        'isYunMonth': yun.isYunMonth
       };
     },
     totalDays: function totalDays(solar_date) {
@@ -16143,11 +16144,35 @@ exports.default = Transformer;
 "use strict";
 
 
-var _vue = __webpack_require__(121);
+module.exports = {
+  translations: {
+    'ko': {
+      'name': 'Korean',
+      'days': ['일', '월', '화', '수', '목', '금', '토'],
+      'solar': '양력', 'lunar': '음력', 'leap': '윤',
+      'solarShort': '양', 'lunarShort': '음'
+    },
+    'en': {
+      'name': 'English',
+      'days': ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+      'solar': 'solar', 'lunar': 'lunar', 'leap': 'leap',
+      'solarShort': 'sol', 'lunarShort': 'lun'
+    }
+  }
+};
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _vue = __webpack_require__(122);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _App = __webpack_require__(124);
+var _App = __webpack_require__(125);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -16165,7 +16190,7 @@ new _vue2.default({
 });
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23307,10 +23332,10 @@ setTimeout(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Vue$3);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(122), __webpack_require__(123)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(123), __webpack_require__(124)))
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -23500,7 +23525,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports) {
 
 var g;
@@ -23527,17 +23552,17 @@ module.exports = g;
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6c28590a_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6c28590a_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(143);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(125)
+  __webpack_require__(126)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -23581,13 +23606,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(126);
+var content = __webpack_require__(127);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23607,7 +23632,7 @@ if(false) {
 }
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -23615,13 +23640,13 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\ninput[data-v-6c28590a]{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px;\n}\n.btn-search[data-v-6c28590a], .btn-search[data-v-6c28590a]:hover, .btn-search[data-v-6c28590a]:focus{ height: 35px; background-color: #222944; border: 1px solid #222944; color: #fff; padding-bottom: 2px; cursor: pointer;\n}\n.contents-div[data-v-6c28590a]{ margin-bottom: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.lunar-container[data-v-6c28590a]{ margin: 0 auto; text-align: center; min-width: 300px; max-width: 450px;\n}\ninput[data-v-6c28590a]{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px; border: 1px solid #9e9e9e;\n}\n.btn-search[data-v-6c28590a], .btn-search[data-v-6c28590a]:hover, .btn-search[data-v-6c28590a]:focus{ height: 35px; background-color: #222944; border: 1px solid #222944; color: #fff; padding-bottom: 2px; cursor: pointer;\n}\n.contents-div[data-v-6c28590a]{ margin-bottom: 20px;\n}\n.col-6[data-v-6c28590a]{ width: 50%; padding: 0px 10px; text-align: left;\n}\n.col-6 label[data-v-6c28590a]{ text-align: left; font-size: 13px; margin: 0px 0px 5px 5px; color: #9b9b9b;\n}\n.select[data-v-6c28590a]{ width: 100%;height: 35px; border: 1px solid #9e9e9e;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports) {
 
 /**
@@ -23654,11 +23679,11 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_src___ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_src___ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_src____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_src___);
 //
 //
@@ -23680,6 +23705,26 @@ module.exports = function listToStyles (parentId, list) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -23694,7 +23739,9 @@ module.exports = function listToStyles (parentId, list) {
       showLunar: false,
       isLunarChecked: false,
       showLunarButton: true,
-      inputDate: ''
+      inputDate: '',
+      lang: 'ko',
+      dateLang: 'en'
     };
   },
   methods: {
@@ -23713,7 +23760,7 @@ module.exports = function listToStyles (parentId, list) {
 });
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23723,7 +23770,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Calendar = __webpack_require__(130);
+var _Calendar = __webpack_require__(131);
 
 var _Calendar2 = _interopRequireDefault(_Calendar);
 
@@ -23732,17 +23779,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _Calendar2.default;
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Calendar_vue__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_784e67de_node_modules_vue_loader_lib_selector_type_template_index_0_Calendar_vue__ = __webpack_require__(141);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Calendar_vue__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_784e67de_node_modules_vue_loader_lib_selector_type_template_index_0_Calendar_vue__ = __webpack_require__(142);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(131)
+  __webpack_require__(132)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -23786,13 +23833,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(132);
+var content = __webpack_require__(133);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23812,7 +23859,7 @@ if(false) {
 }
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -23826,15 +23873,17 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DayCell_vue__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DayCell_vue__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lunar__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lunar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__lunar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lang__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lang___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__lang__);
 //
 //
 //
@@ -23857,6 +23906,8 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
 //
 //
 //
+//
+
 
 
 
@@ -23889,6 +23940,14 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
     showLunarButton: {
       type: Boolean,
       default: true
+    },
+    lang: {
+      type: String,
+      default: 'ko'
+    },
+    dateLang: {
+      type: String,
+      default: 'en'
     }
   },
   mixins: [__WEBPACK_IMPORTED_MODULE_2__lunar___default.a],
@@ -23900,7 +23959,11 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
       date: this.defaultDate ? __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.defaultDate, 'YYYY-MM-DD') : __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
       lunarDate: this.date ? __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD') : __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(__WEBPACK_IMPORTED_MODULE_0_moment___default.a()._d), 'YYYY-MM-DD'),
       isLunar: this.showLunar,
-      isShowLunarButton: this.showLunarButton
+      isShowLunarButton: this.showLunarButton,
+      lan: this.lang,
+      dateLan: this.dateLang,
+      trLunar: this.lan ? __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.lan].lunar : __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.lang].lunar,
+      trDate: this.dateLan ? __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.dateLan].days : __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.dateLang].days
     };
   },
   watch: {
@@ -23912,6 +23975,15 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
     },
     showLunarButton(val) {
       this.isShowLunarButton = val;
+    },
+    lang(val) {
+      this.lan = val;
+      this.trLunar = __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.lan].lunar;
+    },
+    dateLang(val) {
+      this.dateLan = val;
+      this.trDate = __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.dateLan].days;
+      this.initWeekDays();
     }
   },
   created() {
@@ -23929,8 +24001,9 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
       }
     },
     initWeekDays() {
-      const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+      const days = this.trDate;
       const dow = this.firstDayOfWeek;
+      this.weekDays = [];
       for (let i = dow; i < 7 + dow; i++) {
         let day = i % 7;
         this.weekDays.push(days[day]);
@@ -23988,7 +24061,7 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
 });
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -24016,7 +24089,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -24265,19 +24338,19 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 135;
+webpackContext.id = 136;
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_DayCell_vue__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2d0706a4_node_modules_vue_loader_lib_selector_type_template_index_0_DayCell_vue__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_DayCell_vue__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2d0706a4_node_modules_vue_loader_lib_selector_type_template_index_0_DayCell_vue__ = __webpack_require__(141);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(137)
+  __webpack_require__(138)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -24321,13 +24394,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(138);
+var content = __webpack_require__(139);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -24347,7 +24420,7 @@ if(false) {
 }
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -24361,12 +24434,14 @@ exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lunar__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lunar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__lunar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lang__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lang___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__lang__);
 //
 //
 //
@@ -24377,6 +24452,7 @@ exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 
 //
 //
 //
+
 
 
 
@@ -24392,17 +24468,25 @@ exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 
     isSelected: {
       type: Boolean,
       default: false
+    },
+    lang: {
+      type: String,
+      default: 'ko'
     }
   },
   mixins: [__WEBPACK_IMPORTED_MODULE_0__lunar___default.a],
   data() {
     return {
-      lunar: this.convertLunar(this.day)
+      lunar: this.convertLunar(this.day),
+      lan: this.lang
     };
   },
   watch: {
     day(val) {
       this.lunar = this.convertLunar(val);
+    },
+    lang(val) {
+      this.lan = val;
     }
   },
   methods: {
@@ -24416,13 +24500,13 @@ exports.push([module.i, "\n.ayou-day-cell[data-v-2d0706a4]{ margin: 1px; width: 
   },
   computed: {
     lunarText() {
-      return this.lunar && this.lunar.dayTxt;
+      return this.lunar && (this.lunar.isYunMonth ? __WEBPACK_IMPORTED_MODULE_1__lang___default.a.translations[this.lan].leap : __WEBPACK_IMPORTED_MODULE_1__lang___default.a.translations[this.lan].lunarShort) + this.lunar.dayTxt;
     }
   }
 });
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24464,7 +24548,7 @@ if (false) {
 }
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24528,7 +24612,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "for": "show-lunar"
     }
-  }, [_vm._v("음력")])]) : _vm._e(), _vm._v(" "), _c('button', {
+  }, [_vm._v(_vm._s(_vm.trLunar))])]) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "month-button month-button-next",
     on: {
       "click": function($event) {
@@ -24551,7 +24635,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "showLunar": _vm.isLunar,
         "isSelected": _vm.isSelected(day),
-        "day": day
+        "day": day,
+        "lang": _vm.lan
       },
       on: {
         "dayClick": _vm.handleDayClick
@@ -24570,7 +24655,7 @@ if (false) {
 }
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24580,11 +24665,71 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "id": "demo"
     }
   }, [_c('div', {
+    staticClass: "lunar-container"
+  }, [_c('div', {
     staticStyle: {
-      "margin": "0 auto",
-      "text-align": "center"
+      "display": "inline-flex",
+      "width": "100%"
     }
   }, [_c('div', {
+    staticClass: "contents-div col-6"
+  }, [_c('label', [_vm._v("language")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.lang),
+      expression: "lang"
+    }],
+    staticClass: "select",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.lang = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "ko"
+    }
+  }, [_vm._v("Korean")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "en"
+    }
+  }, [_vm._v("English")])])]), _vm._v(" "), _c('div', {
+    staticClass: "contents-div col-6"
+  }, [_c('label', [_vm._v("date language")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.dateLang),
+      expression: "dateLang"
+    }],
+    staticClass: "select",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.dateLang = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "en"
+    }
+  }, [_vm._v("English")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "ko"
+    }
+  }, [_vm._v("Korean")])])])]), _vm._v(" "), _c('div', {
     staticClass: "contents-div"
   }, [_c('input', {
     directives: [{
@@ -24613,12 +24758,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_vm._v("Search")])]), _vm._v(" "), _c('div', {
     staticClass: "contents-div"
-  }, [(_vm.solarDate) ? _c('span', [_vm._v("양력 : " + _vm._s(_vm.solarDate))]) : _vm._e(), (_vm.lunarDate) ? _c('span', [_vm._v(", 음력 : " + _vm._s(_vm.lunarDate))]) : _vm._e()])]), _vm._v(" "), _c('lunar-calendar', {
+  }, [(_vm.solarDate) ? _c('p', [_vm._v("solor date : " + _vm._s(_vm.solarDate))]) : _vm._e(), _vm._v(" "), (_vm.lunarDate) ? _c('p', [_vm._v("lunar date : " + _vm._s(_vm.lunarDate))]) : _vm._e()])]), _vm._v(" "), _c('lunar-calendar', {
     attrs: {
       "firstDayOfWeek": parseInt(_vm.firstDayOfWeek),
       "disableDaysBeforeToday": _vm.disableDaysBeforeToday,
       "defaultDate": _vm.defaultDate,
-      "showLunarButton": _vm.showLunarButton
+      "showLunarButton": _vm.showLunarButton,
+      "lang": _vm.lang,
+      "dateLang": _vm.dateLang
     },
     on: {
       "change": _vm.onChange

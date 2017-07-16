@@ -52,8 +52,16 @@ new Vue({
 | disableDaysBeforeToday    | Disable days before today or not       | Boolean       |  -      |
 | disabledFunc    | Use to decide if the day is disabled or not.       | Function       | null       |
 | defaultDate    | Init the selected date       | String       | -       |
-| showLunar    | show or hide lunar       | Boolean       | false       |
-| showLunarButton    | show or hide lunar check button      | Boolean       | true       |
+| showLunar    | Show or hide lunar       | Boolean       | false       |
+| showLunarButton    | Show or hide lunar check button      | Boolean       | true       |
+| lang    | Language      | String       | 'ko'       |
+| dateLang    | Language of date     | String       | 'en'       |
+
+# Language
+| Addr | Language |
+| :---------- | :---------- |
+| ko    | Korean    |
+| en    | English    |
 
 # Event
 | Event | Desc | params |

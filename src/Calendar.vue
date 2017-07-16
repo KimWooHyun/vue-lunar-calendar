@@ -5,7 +5,7 @@
       <span class="calendar-month">{{dayOfMonth.format('YYYY')}}.{{dayOfMonth.format('MM')}}</span>
       <span style="font-size:14px;" v-if="isShowLunarButton">
         <input type="checkbox" class="checkbox" v-model="isLunar" id="show-lunar">
-        <label for="show-lunar" class="check-lunar">음력</label>
+        <label for="show-lunar" class="check-lunar">{{trLunar}}</label>
       </span>
       <button class="month-button month-button-next" @click.stop.prevent="changeMonth(1)"><i class="month-arrow month-arrow-next"></i></button>
     </div>
@@ -16,7 +16,8 @@
         :isSelected="isSelected(day)"
         :day="day"
         @dayClick="handleDayClick"
-        v-for="(day, index) in days"></day-cell>
+        v-for="(day, index) in days"
+        :lang="lan"></day-cell>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@
   import moment from 'moment'
   import DayCell from './DayCell.vue'
   import Transformer from './lunar'
+  import Translation from './lang'
 
   export default {
     name: 'lunar-calendar',
@@ -52,6 +54,14 @@
       showLunarButton: {
         type:Boolean,
         default: true
+      },
+      lang: {
+        type: String,
+        default: 'ko'
+      },
+      dateLang: {
+        type: String,
+        default: 'en'
       }
     },
     mixins: [Transformer],
@@ -63,7 +73,11 @@
         date: this.defaultDate ? moment(this.defaultDate, 'YYYY-MM-DD') : moment(),
         lunarDate: this.date ? moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD') : moment(this.solar2lunar(moment()._d), 'YYYY-MM-DD'),
         isLunar: this.showLunar,
-        isShowLunarButton: this.showLunarButton
+        isShowLunarButton: this.showLunarButton,
+        lan: this.lang,
+        dateLan: this.dateLang,
+        trLunar: this.lan ? Translation.translations[this.lan].lunar : Translation.translations[this.lang].lunar,
+        trDate: this.dateLan? Translation.translations[this.dateLan].days : Translation.translations[this.dateLang].days
       }
     },
     watch: {
@@ -75,6 +89,15 @@
       },
       showLunarButton (val) {
         this.isShowLunarButton = val
+      },
+      lang (val) {
+        this.lan = val
+        this.trLunar = Translation.translations[this.lan].lunar
+      },
+      dateLang (val) {
+        this.dateLan = val
+        this.trDate = Translation.translations[this.dateLan].days
+        this.initWeekDays()
       }
     },
     created () {
@@ -92,8 +115,9 @@
         }
       },
       initWeekDays () {
-        const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+        const days = this.trDate
         const dow = this.firstDayOfWeek
+        this.weekDays = []
         for (let i = dow; i < 7 + dow; i++) {
           let day = i % 7
           this.weekDays.push(days[day])
