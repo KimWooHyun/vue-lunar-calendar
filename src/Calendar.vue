@@ -71,7 +71,7 @@
         days: [],
         dayOfMonth: moment(),
         date: this.defaultDate ? moment(this.defaultDate, 'YYYY-MM-DD') : moment(),
-        lunarDate: this.date ? moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD') : moment(this.solar2lunar(moment()._d), 'YYYY-MM-DD'),
+        lunarDate: null,
         isLunar: this.showLunar,
         isShowLunarButton: this.showLunarButton,
         lan: this.lang,
@@ -98,12 +98,16 @@
         this.dateLan = val
         this.trDate = Translation.translations[this.dateLan].days
         this.initWeekDays()
+      },
+      isLunar (val) {
+        this.$emit('change', this.date, this.lunarDate, val)
       }
     },
     created () {
       this.initWeekDays()
       this.initDays()
       this.resetDayOfMonth()
+      this.lunarDate = moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD')
     },
     methods: {
       resetDayOfMonth () {
@@ -163,6 +167,7 @@
       handleDayClick (day, lunar) {
         this.date = day.dayMoment
         let lunarDate = moment(lunar, "YYYY-MM-DD")
+        this.lunarDate = lunarDate
         this.$emit('change', day.dayMoment, lunarDate, this.isLunar)
       },
       changeMonth (delta) {
