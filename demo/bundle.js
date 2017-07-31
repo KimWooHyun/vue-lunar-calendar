@@ -23957,7 +23957,7 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
       days: [],
       dayOfMonth: __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
       date: this.defaultDate ? __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.defaultDate, 'YYYY-MM-DD') : __WEBPACK_IMPORTED_MODULE_0_moment___default.a(),
-      lunarDate: this.date ? __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD') : __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(__WEBPACK_IMPORTED_MODULE_0_moment___default.a()._d), 'YYYY-MM-DD'),
+      lunarDate: null,
       isLunar: this.showLunar,
       isShowLunarButton: this.showLunarButton,
       lan: this.lang,
@@ -23984,12 +23984,16 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
       this.dateLan = val;
       this.trDate = __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.dateLan].days;
       this.initWeekDays();
+    },
+    isLunar(val) {
+      this.$emit('change', this.date, this.lunarDate, val);
     }
   },
   created() {
     this.initWeekDays();
     this.initDays();
     this.resetDayOfMonth();
+    this.lunarDate = __WEBPACK_IMPORTED_MODULE_0_moment___default.a(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD');
   },
   methods: {
     resetDayOfMonth() {
@@ -24051,6 +24055,7 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
     handleDayClick(day, lunar) {
       this.date = day.dayMoment;
       let lunarDate = __WEBPACK_IMPORTED_MODULE_0_moment___default.a(lunar, "YYYY-MM-DD");
+      this.lunarDate = lunarDate;
       this.$emit('change', day.dayMoment, lunarDate, this.isLunar);
     },
     changeMonth(delta) {
