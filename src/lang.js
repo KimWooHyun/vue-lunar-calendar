@@ -11,6 +11,12 @@ module.exports = {
       'days': ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
       'solar': 'solar', 'lunar': 'lunar', 'leap': 'leap',
       'solarShort': 'sol', 'lunarShort': 'lun'
+    },
+    'it': {
+      'name': 'Italian',
+      'days': ['DOM', 'LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB'],
+      'solar': 'solare', 'lunare': 'lunare', 'salto': 'salto',
+      'solarShort': 'sol', 'lunaCorta': 'lun'
     }
   }
 };
