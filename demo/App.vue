@@ -7,6 +7,7 @@
           <select class="select" v-model="lang">
             <option value="ko">Korean</option>
             <option value="en">English</option>
+            <option value="it">Italian</option>
           </select>
         </div>
         <div class="contents-div col-6">
@@ -14,6 +15,7 @@
           <select class="select" v-model="dateLang">
             <option value="en">English</option>
             <option value="ko">Korean</option>
+            <option value="it">Italian</option>
           </select>
         </div>
       </div>

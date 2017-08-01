@@ -76,8 +76,8 @@
         isShowLunarButton: this.showLunarButton,
         lan: this.lang,
         dateLan: this.dateLang,
-        trLunar: this.lan ? Translation.translations[this.lan].lunar : Translation.translations[this.lang].lunar,
-        trDate: this.dateLan? Translation.translations[this.dateLan].days : Translation.translations[this.dateLang].days
+        trLunar: Translation.translations[this.lang].lunar,
+        trDate: Translation.translations[this.dateLang].days
       }
     },
     watch: {

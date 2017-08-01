@@ -16157,6 +16157,12 @@ module.exports = {
       'days': ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
       'solar': 'solar', 'lunar': 'lunar', 'leap': 'leap',
       'solarShort': 'sol', 'lunarShort': 'lun'
+    },
+    'it': {
+      'name': 'Italian',
+      'days': ['DOM', 'LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB'],
+      'solar': 'solare', 'lunar': 'lunare', 'leap': 'salto',
+      'solarShort': 'sol', 'lunarShort': 'lun'
     }
   }
 };
@@ -23724,6 +23730,8 @@ module.exports = function listToStyles (parentId, list) {
 //
 //
 //
+//
+//
 
 
 
@@ -23962,8 +23970,8 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
       isShowLunarButton: this.showLunarButton,
       lan: this.lang,
       dateLan: this.dateLang,
-      trLunar: this.lan ? __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.lan].lunar : __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.lang].lunar,
-      trDate: this.dateLan ? __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.dateLan].days : __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.dateLang].days
+      trLunar: __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.lang].lunar,
+      trDate: __WEBPACK_IMPORTED_MODULE_3__lang___default.a.translations[this.dateLang].days
     };
   },
   watch: {
@@ -24705,7 +24713,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "value": "en"
     }
-  }, [_vm._v("English")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("English")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "it"
+    }
+  }, [_vm._v("Italian")])])]), _vm._v(" "), _c('div', {
     staticClass: "contents-div col-6"
   }, [_c('label', [_vm._v("date language")]), _vm._v(" "), _c('select', {
     directives: [{
@@ -24734,7 +24746,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "value": "ko"
     }
-  }, [_vm._v("Korean")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Korean")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "it"
+    }
+  }, [_vm._v("Italian")])])])]), _vm._v(" "), _c('div', {
     staticClass: "contents-div"
   }, [_c('input', {
     directives: [{
