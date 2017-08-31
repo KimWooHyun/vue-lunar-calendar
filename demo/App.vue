@@ -8,14 +8,16 @@
             <option value="ko">Korean</option>
             <option value="en">English</option>
             <option value="it">Italian</option>
+            <option value="cn">Chinese</option>
           </select>
         </div>
         <div class="contents-div col-6">
           <label>date language</label>
           <select class="select" v-model="dateLang">
-            <option value="en">English</option>
             <option value="ko">Korean</option>
+            <option value="en">English</option>
             <option value="it">Italian</option>
+            <option value="cn">Chinese</option>
           </select>
         </div>
       </div>
