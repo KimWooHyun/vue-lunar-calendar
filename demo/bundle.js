@@ -16163,6 +16163,12 @@ module.exports = {
       'days': ['DOM', 'LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB'],
       'solar': 'solare', 'lunar': 'lunare', 'leap': 'salto',
       'solarShort': 'sol', 'lunarShort': 'lun'
+    },
+    'cn': {
+      'name': 'Chinese',
+      'days': ['日', '一', '二', '三', '四', '五', '六'],
+      'solar': '阳历', 'lunar': '阴历', 'leap': '闰',
+      'solarShort': '阳', 'lunarShort': '阴'
     }
   }
 };
@@ -23732,6 +23738,8 @@ module.exports = function listToStyles (parentId, list) {
 //
 //
 //
+//
+//
 
 
 
@@ -24717,7 +24725,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "value": "it"
     }
-  }, [_vm._v("Italian")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Italian")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "cn"
+    }
+  }, [_vm._v("Chinese")])])]), _vm._v(" "), _c('div', {
     staticClass: "contents-div col-6"
   }, [_c('label', [_vm._v("date language")]), _vm._v(" "), _c('select', {
     directives: [{
@@ -24740,17 +24752,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('option', {
     attrs: {
-      "value": "en"
-    }
-  }, [_vm._v("English")]), _vm._v(" "), _c('option', {
-    attrs: {
       "value": "ko"
     }
   }, [_vm._v("Korean")]), _vm._v(" "), _c('option', {
     attrs: {
+      "value": "en"
+    }
+  }, [_vm._v("English")]), _vm._v(" "), _c('option', {
+    attrs: {
       "value": "it"
     }
-  }, [_vm._v("Italian")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Italian")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "cn"
+    }
+  }, [_vm._v("Chinese")])])])]), _vm._v(" "), _c('div', {
     staticClass: "contents-div"
   }, [_c('input', {
     directives: [{

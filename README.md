@@ -63,6 +63,7 @@ new Vue({
 | ko    | Korean    |
 | en    | English    |
 | it    | Italian    |
+| cn    | Chinese    |
 
 # Event
 | Event | Desc | params |
