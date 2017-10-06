@@ -3,8 +3,9 @@
 [![npm](https://img.shields.io/npm/l/vue-lunar-calendar.svg)]()
 
 # vue-lunar-calendar
-A vue component for lunar calendar.
-Uses Moment.js for date operations.
+A vue component for lunar calendar. Uses Moment.js for date operations.<br/>
+* This is the Korean lunar calendar. It is different from Chinese Lunar Calendar<br/>
+* You can also use it as a solar(gregorian) calendar
 
 # Online demo
 * [demo](https://kimwoohyun.github.io/vue-lunar-calendar/)
@@ -64,6 +65,8 @@ new Vue({
 | en    | English    |
 | it    | Italian    |
 | cn    | Chinese    |
+
+If you want to add to language, please check [here](https://github.com/KimWooHyun/vue-lunar-calendar/wiki/Language-Contributing--Guide)
 
 # Event
 | Event | Desc | params |
