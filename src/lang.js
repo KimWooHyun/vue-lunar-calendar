@@ -23,6 +23,12 @@ module.exports = {
       'days': ['日', '一', '二', '三', '四', '五', '六'],
       'solar': '阳历', 'lunar': '阴历', 'leap': '闰',
       'solarShort': '阳', 'lunarShort': '阴'
+    },
+    'vi': {
+      'name': 'Tiếng Việt',
+      'days': ['CHỦ NHẬT', 'HAI', 'BA', 'TƯ', 'NĂM', 'SÁU', 'BẢY'],
+      'solar': 'dương lịch', 'lunar': 'âm lịch', 'leap': 'nhuận',
+      'solarShort': 'dương', 'lunarShort': 'âm'
     }
   }
 };
