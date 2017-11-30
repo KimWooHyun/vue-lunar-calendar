@@ -26,7 +26,7 @@ module.exports = {
     },
     'vi': {
       'name': 'Tiếng Việt',
-      'days': ['CHỦ NHẬT', 'HAI', 'BA', 'TƯ', 'NĂM', 'SÁU', 'BẢY'],
+      'days': ['CN', 'HAI', 'BA', 'TƯ', 'NĂM', 'SÁU', 'BẢY'],
       'solar': 'dương lịch', 'lunar': 'âm lịch', 'leap': 'nhuận',
       'solarShort': 'dương', 'lunarShort': 'âm'
     }
