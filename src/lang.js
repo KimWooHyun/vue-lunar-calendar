@@ -25,7 +25,7 @@ module.exports = {
       'solarShort': '阳', 'lunarShort': '阴'
     },
     'vi': {
-      'name': 'Tiếng Việt',
+      'name': 'Vietnamese',
       'days': ['CN', 'HAI', 'BA', 'TƯ', 'NĂM', 'SÁU', 'BẢY'],
       'solar': 'dương lịch', 'lunar': 'âm lịch', 'leap': 'nhuận',
       'solarShort': 'dương', 'lunarShort': 'âm'
