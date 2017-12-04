@@ -61,24 +61,20 @@
     }
   }
 </script>
+
 <style scoped>
   .ayou-day-cell{ margin: 1px; width: 13.73%; height: 60px; display: inline-block; text-align: center; background-color: #fbfbfb; }
   .ayou-day-cell.selected{ background-color: #222944; color: #fff; }
   .ayou-day-cell:hover{ cursor: pointer; }
-  .day-wrapper{ width: 100%; }
-  .solar{ text-align: right; color: #797979; padding: 10px 5px 0px 0px; font-size: 23px; font-weight: 300; }
+  .day-wrapper{ position: relative; width: 100%; height: 100%; }
+  .solar{ position: absolute; bottom: 0; right: 0; text-align: right; color: #797979; padding: 10px 5px 0px 0px; font-size: 23px; font-weight: 300; }
   .solar.selected{ color: #ffffff; }
   .solar.passive{ color: #cccccc; }
   .solar.passive.selected{ opacity: 0.4; }
-  .lunar{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px 3px; text-align: left; }
+  .lunar{ position: absolute; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px 3px; text-align: left; }
   .without-lunar{ margin-top: 1px; }
 
   @media (max-width: 320px) {
     .ayou-day-cell { width: 13.63%; }
-  }
-  @media (min-width: 768px) {
-    .solar { width: 34%; padding: 0px; font-size: 16px; margin: 5px 5px 0px 0px; }
-    .lunar { width: 66%; margin-top: 4px; }
-    .day-wrapper{ display: inline-flex; }
   }
 </style>
