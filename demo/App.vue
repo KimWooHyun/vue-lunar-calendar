@@ -5,13 +5,13 @@
         <div class="contents-div col-6">
           <label>language</label>
           <select class="select" v-model="lang">
-            <option v-for="(value, key, index) in langs.translations" :key="value" :value="key">{{value.name}}</option>
+            <option v-for="(value, key) in langs.translations" :key="value" :value="key">{{value.name}}</option>
           </select>
         </div>
         <div class="contents-div col-6">
           <label>date language</label>
           <select class="select" v-model="dateLang">
-            <option v-for="(value, key, index) in langs.translations" :key="value" :value="key">{{value.name}}</option>
+            <option v-for="(value, key) in langs.translations" :key="value" :value="key">{{value.name}}</option>
           </select>
         </div>
       </div>

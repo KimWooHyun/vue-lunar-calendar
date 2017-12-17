@@ -23927,6 +23927,8 @@ exports.push([module.i, "\n.date-container[data-v-784e67de], .selected-container
 //
 //
 //
+//
+//
 
 
 
@@ -24651,12 +24653,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })])]), _vm._v(" "), _c('div', {
     staticClass: "week-days"
   }, _vm._l((_vm.weekDays), function(day) {
-    return _c('span', [_vm._v(_vm._s(day))])
+    return _c('span', {
+      key: day.id
+    }, [_vm._v(_vm._s(day))])
   })), _vm._v(" "), _c('div', {
     staticClass: "days"
   }, _vm._l((_vm.days), function(day, index) {
     return _c('day-cell', {
-      key: "index",
+      key: index,
       attrs: {
         "showLunar": _vm.isLunar,
         "isSelected": _vm.isSelected(day),
@@ -24717,7 +24721,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.lang = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.langs.translations), function(value, key, index) {
+  }, _vm._l((_vm.langs.translations), function(value, key) {
     return _c('option', {
       key: value,
       domProps: {
@@ -24745,7 +24749,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.dateLang = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.langs.translations), function(value, key, index) {
+  }, _vm._l((_vm.langs.translations), function(value, key) {
     return _c('option', {
       key: value,
       domProps: {

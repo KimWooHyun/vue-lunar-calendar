@@ -9,16 +9,17 @@
       </span>
       <button class="month-button month-button-next" @click.stop.prevent="changeMonth(1)"><i class="month-arrow month-arrow-next"></i></button>
     </div>
-    <div class="week-days"><span v-for="day in weekDays">{{day}}</span></div>
+    <div class="week-days"><span v-for="day in weekDays" :key="day.id">{{day}}</span></div>
     <div class="days">
       <day-cell
+        v-for="(day, index) in days"
         :key="index"
         :showLunar="isLunar"
         :isSelected="isSelected(day)"
         :day="day"
+        :lang="lan"
         @dayClick="handleDayClick"
-        v-for="(day, index) in days"
-        :lang="lan"></day-cell>
+      ></day-cell>
     </div>
   </div>
 </template>
