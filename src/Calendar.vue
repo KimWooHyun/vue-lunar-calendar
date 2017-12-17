@@ -11,7 +11,8 @@
     </div>
     <div class="week-days"><span v-for="day in weekDays">{{day}}</span></div>
     <div class="days">
-      <day-cell key="index"
+      <day-cell
+        :key="index"
         :showLunar="isLunar"
         :isSelected="isSelected(day)"
         :day="day"
