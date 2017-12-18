@@ -15,6 +15,12 @@ A vue component for lunar calendar. Uses Moment.js for date operations.<br/>
 npm install vue-lunar-calendar --save
 ```
 
+or using Yarn
+
+```shell
+yarn add vue-lunar-calendar
+```
+
 # Usage
 1. import your project
 ```javascript
@@ -73,6 +79,25 @@ If you want to add to language, please check [here](https://github.com/KimWooHyu
 | Event | Desc | params |
 | :---------- | :---------- | :----------: |
 | change    | Emit when cell is clicked       | Function       |
+
+# Build
+If you want to build this project
+
+```shell
+# Build the project
+npm run build
+# Build the demo
+npm run demo
+```
+
+or using Yarn
+
+```shell
+# Build the project
+yarn build
+# Build the demo
+yarn demo
+```
 
 # Thanks for
 @[ClaudeSeo](https://github.com/ClaudeSeo)
