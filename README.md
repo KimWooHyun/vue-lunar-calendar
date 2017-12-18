@@ -74,7 +74,7 @@ new Vue({
 | vi    | Vietnamese    |
 | fr    | French    |
 
-If you want to add to language, please check [here](https://github.com/KimWooHyun/vue-lunar-calendar/wiki/Language-Contributing--Guide)
+If you want to add to language, please check [CONTRIBUTING.md](https://github.com/KimWooHyun/vue-lunar-calendar/blob/master/CONTRIBUTING.md)
 
 # Event
 | Event | Desc | params |
