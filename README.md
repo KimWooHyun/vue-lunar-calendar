@@ -66,6 +66,7 @@ new Vue({
 | it    | Italian    |
 | cn    | Chinese    |
 | vi    | Vietnamese    |
+| fr    | French    |
 
 If you want to add to language, please check [here](https://github.com/KimWooHyun/vue-lunar-calendar/wiki/Language-Contributing--Guide)
 
