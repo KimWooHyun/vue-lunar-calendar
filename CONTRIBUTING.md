@@ -17,17 +17,12 @@ How to adding language.<br/>
 * [country_name_short] - **only English**
 * [order] - translate
 
-## 2. Add to select option `/demo/App.vue`
-```html
-<option value="country_name_short">language_name</option>
-```
-
-## 3. Run script 
+## 2. Run script
 ```
 yarn build
 yarn demo
 ```
 if you run script `yarn start`
 
-## 4. Write README `README.md`
+## 3. Write README `README.md`
 Add to language.
