@@ -19,6 +19,15 @@ How to adding language.<br/>
 
 ## 2. Run script
 ```
+npm run build
+npm run demo
+```
+if you run script `npm run start`
+
+
+or using Yarn
+
+```
 yarn build
 yarn demo
 ```
