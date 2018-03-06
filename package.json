@@ -9,13 +9,13 @@
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
     "css-loader": "^0.28.4",
+    "moment": "^2.21.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
-    "moment": "^2.18.1",
     "vue": "^2.3.4",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^13.0.0",
