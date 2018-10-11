@@ -35,6 +35,12 @@ module.exports = {
       'days': ['DIM', 'LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM'],
       'solar': 'solaire', 'lunar': 'lunaire', 'leap': 'bissextile',
       'solarShort': 'sol', 'lunarShort': 'lun'
+    },
+    'ja': {
+      'name': 'Japanese',
+      'days': ['日', '月', '火', '水', '木', '金', '土'],
+      'solar': '陽暦', 'lunar': '陰暦', 'leap': '閏',
+      'solarShort': '陽', 'lunarShort': '陰'
     }
   }
 };
