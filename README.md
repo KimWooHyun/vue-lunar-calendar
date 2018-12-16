@@ -82,6 +82,24 @@ If you want to add to language, please check [CONTRIBUTING.md](https://github.co
 | :---------- | :---------- | :----------: |
 | change    | Emit when cell is clicked       | Function       |
 
+# Run the project
+If you want to run this project
+
+```shell
+npm run start
+```
+
+or using Yarn
+
+```shell
+yarn start
+```
+
+open user browser
+```
+http://0.0.0.0:8080/
+```
+
 # Build
 If you want to build this project
 
