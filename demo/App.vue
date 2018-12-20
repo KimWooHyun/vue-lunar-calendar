@@ -64,7 +64,11 @@ export default {
       this.isLunarChecked = isLunarChecked
     },
     searchDate () {
-      this.defaultDate = this.inputDate
+      if (this.inputDate) {
+        this.defaultDate = this.inputDate
+      } else {
+        window.alert('Please enter a value.');
+      }
     }
   },
   components: {
@@ -75,8 +79,8 @@ export default {
 
 <style scoped>
 .lunar-container{ margin: 0 auto; text-align: center; min-width: 300px; max-width: 450px; }
-input{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px; border: 1px solid #9e9e9e; }
-.btn-search, .btn-search:hover, .btn-search:focus{ height: 35px; background-color: #222944; border: 1px solid #222944; color: #fff; padding-bottom: 2px; cursor: pointer; }
+input{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px; border: 1px solid #9e9e9e; vertical-align: middle; }
+.btn-search, .btn-search:hover, .btn-search:focus{ height: 35px; background-color: #222944; border: 1px solid #222944; color: #fff; padding-bottom: 2px; cursor: pointer; outline: none; }
 .contents-div{ margin-bottom: 20px; }
 .col-6{ width: 50%; padding: 0px 10px; text-align: left; }
 .col-6 label{ text-align: left; font-size: 13px; margin: 0px 0px 5px 5px; color: #9b9b9b; }
