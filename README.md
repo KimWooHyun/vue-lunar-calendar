@@ -48,8 +48,15 @@ new Vue({
     :disableDaysBeforeToday="disableDaysBeforeToday"
     :defaultDate="defaultDate"
     :showLunarButton="showLunarButton"
+    :cellClass="$style.cell"
   ></lunar-calendar>
 </template>
+
+<style module>
+  .cell {
+    background-color: #222944;
+  }
+</sryle>
 ```
 
 # Props
@@ -63,6 +70,7 @@ new Vue({
 | showLunarButton    | Show or hide lunar check button      | Boolean       | true       |
 | lang    | Language      | String       | 'ko'       |
 | dateLang    | Language of date     | String       | 'en'       |
+| cellClass    | cell css class     | String       | -      |
 
 # Language
 | Addr | Language |
