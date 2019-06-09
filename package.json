@@ -23,7 +23,7 @@
   },
   "name": "vue-lunar-calendar",
   "description": "A vue component for lunar calendar. Uses Moment.js for date operations.",
-  "version": "1.5.6",
+  "version": "1.6.0",
   "main": "src/index.js",
   "repository": {
     "type": "git",
