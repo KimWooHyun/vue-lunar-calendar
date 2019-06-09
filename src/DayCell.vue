@@ -1,10 +1,17 @@
 <template>
-  <div :class="['ayou-day-cell', isSelected? 'selected': '']" @click.stop.prevent="handleDayClick()" :title="showLunar && lunarText">
+  <div :class="['ayou-day-cell', isSelected && ['ayou-day-cell-selected', cellClass], { 'passive': day.isPassive }]"
+    @click.stop.prevent="handleDayClick()"
+    :title="showLunar && lunarText"
+  >
     <div class="day-wrapper">
-      <div class="lunar" :class="{'passive': day.isPassive}">
+      <div class="lunar">
         <template v-if="showLunar">{{lunarText}}</template>
       </div>
-      <div class="solar" :class="{'selected': isSelected, 'passive': day.isPassive, 'without-lunar':!showLunar}">{{day.dayMoment.date()}}</div>
+      <div class="solar" :class="{
+        'solar-selected': isSelected,
+        'without-lunar':!showLunar
+      }"
+      >{{day.dayMoment.date()}}</div>
     </div>
   </div>
 </template>
@@ -28,6 +35,9 @@
       lang: {
         type: String,
         default: 'ko'
+      },
+      cellClass: {
+        type: String
       }
     },
     mixins: [Transformer],
@@ -62,15 +72,14 @@
   }
 </script>
 
-<style scoped>
+<style>
   .ayou-day-cell{ margin: 1px; width: 13.73%; height: 60px; display: inline-block; text-align: center; background-color: #fbfbfb; }
-  .ayou-day-cell.selected{ background-color: #222944; color: #fff; }
+  .ayou-day-cell-selected{ background-color: #222944; color: #fff; }
   .ayou-day-cell:hover{ cursor: pointer; }
   .day-wrapper{ position: relative; width: 100%; height: 100%; }
   .solar{ position: absolute; bottom: 0; right: 0; text-align: right; color: #797979; padding: 10px 5px 0px 0px; font-size: 23px; font-weight: 300; }
-  .solar.selected{ color: #ffffff; }
-  .solar.passive{ color: #cccccc; }
-  .solar.passive.selected{ opacity: 0.4; }
+  .solar-selected{ color: #ffffff; }
+  .passive{ color: #cccccc; opacity: 0.5; }
   .lunar{ position: absolute; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px 3px; text-align: left; }
   .without-lunar{ margin-top: 1px; }
 

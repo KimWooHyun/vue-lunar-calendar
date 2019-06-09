@@ -62,6 +62,7 @@ export default {
       this.solarDate = solarDate.format('YYYY-MM-DD')
       this.lunarDate = lunarDate.format('YYYY-MM-DD')
       this.isLunarChecked = isLunarChecked
+      this.inputDate = this.solarDate
     },
     searchDate () {
       if (this.inputDate) {

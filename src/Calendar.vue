@@ -18,6 +18,7 @@
         :isSelected="isSelected(day)"
         :day="day"
         :lang="lan"
+        :cellClass="cellClass"
         @dayClick="handleDayClick"
       ></day-cell>
     </div>
@@ -64,7 +65,10 @@
       dateLang: {
         type: String,
         default: 'en'
-      }
+      },
+      cellClass: {
+        type: String,
+      },
     },
     mixins: [Transformer],
     data () {
