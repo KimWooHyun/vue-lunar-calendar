@@ -32,6 +32,7 @@
       :showLunarButton="showLunarButton"
       :lang="lang"
       :dateLang="dateLang"
+      cellSeletedClass="custom-seleted-cell"
     ></lunar-calendar>
   </div>
 </template>
@@ -86,4 +87,13 @@ input{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px; border: 1
 .col-6{ width: 50%; padding: 0px 10px; text-align: left; }
 .col-6 label{ text-align: left; font-size: 13px; margin: 0px 0px 5px 5px; color: #9b9b9b; }
 .select{ width: 100%;height: 35px; border: 1px solid #9e9e9e; }
+</style>
+
+<style>
+/*
+custom user color
+.custom-seleted-cell {
+  background: #222944;
+}
+*/
 </style>

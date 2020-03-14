@@ -18,7 +18,7 @@
         :isSelected="isSelected(day)"
         :day="day"
         :lang="lan"
-        :cellClass="cellClass"
+        :cellSeletedClass="cellSeletedClass"
         @dayClick="handleDayClick"
       ></day-cell>
     </div>
@@ -66,7 +66,7 @@
         type: String,
         default: 'en'
       },
-      cellClass: {
+      cellSeletedClass: {
         type: String,
       },
     },

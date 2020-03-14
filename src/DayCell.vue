@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ayou-day-cell', isSelected && ['ayou-day-cell-selected', cellClass], { 'passive': day.isPassive }]"
+  <div :class="['ayou-day-cell', isSelected && ['ayou-day-cell-selected', cellSeletedClass], { 'passive': day.isPassive }]"
     @click.stop.prevent="handleDayClick()"
     :title="showLunar && lunarText"
   >
@@ -36,7 +36,7 @@
         type: String,
         default: 'ko'
       },
-      cellClass: {
+      cellSeletedClass: {
         type: String
       }
     },

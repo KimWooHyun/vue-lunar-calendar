@@ -70,7 +70,7 @@ new Vue({
 | showLunarButton    | Show or hide lunar check button      | Boolean       | true       |
 | lang    | Language      | String       | 'ko'       |
 | dateLang    | Language of date     | String       | 'en'       |
-| cellClass    | cell css class     | String       | -      |
+| cellSeletedClass    | cell seleted css class     | String       | -      |
 
 # Language
 | Addr | Language |
