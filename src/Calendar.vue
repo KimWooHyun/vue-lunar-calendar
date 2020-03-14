@@ -19,6 +19,7 @@
         :day="day"
         :lang="lan"
         :cellSeletedClass="cellSeletedClass"
+        :customCellClass="customCellsData && hasCustomCellClass(day)"
         @dayClick="handleDayClick"
       ></day-cell>
     </div>
@@ -69,6 +70,9 @@
       cellSeletedClass: {
         type: String,
       },
+      customCells: {
+        type: Array,
+      },
     },
     mixins: [Transformer],
     data () {
@@ -83,7 +87,8 @@
         lan: this.lang,
         dateLan: this.dateLang,
         trLunar: Translation.translations[this.lang].lunar,
-        trDate: Translation.translations[this.dateLang].days
+        trDate: Translation.translations[this.dateLang].days,
+        customCellsData: this.customCells,
       }
     },
     watch: {
@@ -116,6 +121,14 @@
       this.lunarDate = moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD')
     },
     methods: {
+      hasCustomCellClass (day) {
+        const result = this.customCellsData.map((cell) => {
+          const parseCell = JSON.parse(JSON.stringify(cell))
+          const formatDate = day.dayMoment.format('YYYY-MM-DD')
+          return parseCell.days.includes(formatDate) ? parseCell.customCellClass : ""
+        });
+        return result.join(" ");
+      },
       resetDayOfMonth () {
         if (this.date.format('YYYY-MM') !== this.dayOfMonth.format('YYYY-MM')) {
           let _diff = Number(this.date.diff(this.dayOfMonth, 'months'))

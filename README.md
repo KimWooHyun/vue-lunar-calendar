@@ -71,6 +71,7 @@ new Vue({
 | lang    | Language      | String       | 'ko'       |
 | dateLang    | Language of date     | String       | 'en'       |
 | cellSeletedClass    | cell seleted css class     | String       | -      |
+| customCells    | custom cells    | Array       | -      |
 
 # Language
 | Addr | Language |
