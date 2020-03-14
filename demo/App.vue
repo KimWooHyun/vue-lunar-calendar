@@ -33,6 +33,7 @@
       :showLunarButton="showLunarButton"
       :lang="lang"
       :dateLang="dateLang"
+      :customCells="customCells"
       cellSeletedClass="custom-seleted-cell"
     ></lunar-calendar>
   </div>
@@ -40,11 +41,11 @@
 <script>
 import lunarCalendar from 'src/'
 import Translation from 'src/lang'
-// import moment from 'moment';
+import moment from 'moment';
 
 export default {
   data() {
-    // const today = new moment();
+    const today = new moment();
 
     return {
       solarDate: '',
@@ -60,19 +61,17 @@ export default {
       lang: 'ko',
       dateLang: 'en',
       langs: Translation,
-      // customCells: [{
-      //   days: [this.formatDate(today.add(1, 'days')), this.formatDate(today.add(1, 'days'))],
-      //   customCellClass: "custom-cell",
-      // }, {
-      //   days: [this.formatDate(today.add(3, 'days')), this.formatDate(today.add(2, 'days'))],
-      //   customCellClass: "custom-cell-2",
-      // }]
+      customCells: [{
+        days: [this.formatDate(today.add(1, 'days')), this.formatDate(today.add(1, 'days'))],
+        customCellClass: "custom-cell",
+        groupName: "custom cell"
+      }]
     };
   },
   methods: {
-    // formatDate (date) {
-    //   return date.format('YYYY-MM-DD');
-    // },
+    formatDate (date) {
+      return date.format('YYYY-MM-DD');
+    },
     onChange (solarDate, lunarDate, isLunarChecked) {
       this.solarDate = solarDate.format('YYYY-MM-DD')
       this.lunarDate = lunarDate.format('YYYY-MM-DD')
@@ -109,6 +108,7 @@ custom user color
 .custom-seleted-cell {
   background: #222944;
 }
+*/
 
 .custom-cell {
   background: mediumturquoise;
@@ -121,5 +121,4 @@ custom user color
 .custom-cell .solar, .custom-cell-2 .solar {
   color: #ffffff;
 }
-*/
 </style>

@@ -19,7 +19,8 @@
         :day="day"
         :lang="lan"
         :cellSeletedClass="cellSeletedClass"
-        :customCellClass="customCellsData && hasCustomCellClass(day)"
+        :customCellClass="customCellsData && hasCustomCell(day, 'className')"
+        :cellGroupName="customCellsData && hasCustomCell(day, 'groupName')"
         @dayClick="handleDayClick"
       ></day-cell>
     </div>
@@ -89,6 +90,7 @@
         trLunar: Translation.translations[this.lang].lunar,
         trDate: Translation.translations[this.dateLang].days,
         customCellsData: this.customCells,
+        cellGroupName: '',
       }
     },
     watch: {
@@ -121,11 +123,20 @@
       this.lunarDate = moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD')
     },
     methods: {
-      hasCustomCellClass (day) {
+      hasCustomCell (day, type) {
         const result = this.customCellsData.map((cell) => {
           const parseCell = JSON.parse(JSON.stringify(cell))
           const formatDate = day.dayMoment.format('YYYY-MM-DD')
-          return parseCell.days.includes(formatDate) ? parseCell.customCellClass : ""
+
+          if (parseCell.days.includes(formatDate)) {
+            if (type === "className" && parseCell.customCellClass) {
+              return parseCell.customCellClass 
+            } else if (type === "groupName" && parseCell.groupName) {
+              return parseCell.groupName
+            }
+          } else {
+            return
+          }
         });
         return result.join(" ");
       },
