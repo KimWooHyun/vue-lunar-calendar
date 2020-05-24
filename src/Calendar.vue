@@ -125,7 +125,7 @@
     methods: {
       hasCustomCell (day, type) {
         const result = this.customCellsData.map((cell) => {
-          const parseCell = JSON.parse(JSON.stringify(cell))
+          const parseCell = Object.assign(cell)
           const formatDate = day.dayMoment.format('YYYY-MM-DD')
 
           if (parseCell.days.includes(formatDate)) {
