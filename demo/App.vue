@@ -65,6 +65,10 @@ export default {
         days: [this.formatDate(today.add(1, 'days')), this.formatDate(today.add(1, 'days'))],
         customCellClass: "custom-cell",
         groupName: "custom cell"
+      }, {
+        days: [this.formatDate(today.add(-3, 'days'))],
+        customCellClass: "custom-cell-2",
+        groupName: "custom cell 2"
       }]
     };
   },
@@ -103,19 +107,19 @@ input{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px; border: 1
 </style>
 
 <style>
-/*
-custom user color
-.custom-seleted-cell {
-  background: #222944;
-}
-*/
-
 .custom-cell {
   background: mediumturquoise;
 }
 
 .custom-cell-2 {
   background: purple;
+}
+
+/*
+custom user color
+*/
+.custom-seleted-cell {
+  background: #222944;
 }
 
 .custom-cell .solar, .custom-cell-2 .solar {
