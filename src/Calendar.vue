@@ -18,7 +18,9 @@
         :isSelected="isSelected(day)"
         :day="day"
         :lang="lan"
-        :cellClass="cellClass"
+        :cellSeletedClass="cellSeletedClass"
+        :customCellClass="customCellsData && hasCustomCell(day, 'className')"
+        :cellGroupName="customCellsData && hasCustomCell(day, 'groupName')"
         @dayClick="handleDayClick"
       ></day-cell>
     </div>
@@ -66,8 +68,11 @@
         type: String,
         default: 'en'
       },
-      cellClass: {
+      cellSeletedClass: {
         type: String,
+      },
+      customCells: {
+        type: Array,
       },
     },
     mixins: [Transformer],
@@ -83,7 +88,9 @@
         lan: this.lang,
         dateLan: this.dateLang,
         trLunar: Translation.translations[this.lang].lunar,
-        trDate: Translation.translations[this.dateLang].days
+        trDate: Translation.translations[this.dateLang].days,
+        customCellsData: this.customCells,
+        cellGroupName: '',
       }
     },
     watch: {
@@ -116,6 +123,23 @@
       this.lunarDate = moment(this.solar2lunar(this.date._d).day, 'YYYY-MM-DD')
     },
     methods: {
+      hasCustomCell (day, type) {
+        const result = this.customCellsData.map((cell) => {
+          const parseCell = Object.assign(cell)
+          const formatDate = day.dayMoment.format('YYYY-MM-DD')
+
+          if (parseCell.days.includes(formatDate)) {
+            if (type === "className" && parseCell.customCellClass) {
+              return parseCell.customCellClass 
+            } else if (type === "groupName" && parseCell.groupName) {
+              return parseCell.groupName
+            }
+          } else {
+            return
+          }
+        });
+        return result.join(" ");
+      },
       resetDayOfMonth () {
         if (this.date.format('YYYY-MM') !== this.dayOfMonth.format('YYYY-MM')) {
           let _diff = Number(this.date.diff(this.dayOfMonth, 'months'))

@@ -24,6 +24,7 @@
         <p v-if="lunarDate">lunar date : {{lunarDate}}</p>
       </div>
     </div>
+    <!-- if you want to use customCells props => :customCells="customCells"  -->
     <lunar-calendar
       @change="onChange"
       :firstDayOfWeek="parseInt(firstDayOfWeek)"
@@ -32,15 +33,20 @@
       :showLunarButton="showLunarButton"
       :lang="lang"
       :dateLang="dateLang"
+      :customCells="customCells"
+      cellSeletedClass="custom-seleted-cell"
     ></lunar-calendar>
   </div>
 </template>
 <script>
 import lunarCalendar from 'src/'
 import Translation from 'src/lang'
+import moment from 'moment';
 
 export default {
   data() {
+    const today = new moment();
+
     return {
       solarDate: '',
       lunarDate: '',
@@ -54,10 +60,18 @@ export default {
       inputDate: '',
       lang: 'ko',
       dateLang: 'en',
-      langs: Translation
+      langs: Translation,
+      customCells: [{
+        days: [this.formatDate(today.add(1, 'days')), this.formatDate(today.add(1, 'days'))],
+        customCellClass: "custom-cell",
+        groupName: "custom cell"
+      }]
     };
   },
   methods: {
+    formatDate (date) {
+      return date.format('YYYY-MM-DD');
+    },
     onChange (solarDate, lunarDate, isLunarChecked) {
       this.solarDate = solarDate.format('YYYY-MM-DD')
       this.lunarDate = lunarDate.format('YYYY-MM-DD')
@@ -86,4 +100,25 @@ input{ height: 30px; width: 200px; font-size: 13px; padding-left: 5px; border: 1
 .col-6{ width: 50%; padding: 0px 10px; text-align: left; }
 .col-6 label{ text-align: left; font-size: 13px; margin: 0px 0px 5px 5px; color: #9b9b9b; }
 .select{ width: 100%;height: 35px; border: 1px solid #9e9e9e; }
+</style>
+
+<style>
+/*
+custom user color
+.custom-seleted-cell {
+  background: #222944;
+}
+*/
+
+.custom-cell {
+  background: mediumturquoise;
+}
+
+.custom-cell-2 {
+  background: purple;
+}
+
+.custom-cell .solar, .custom-cell-2 .solar {
+  color: #ffffff;
+}
 </style>
