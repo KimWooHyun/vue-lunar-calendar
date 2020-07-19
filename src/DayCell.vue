@@ -1,11 +1,26 @@
 <template>
-  <div :class="['ayou-day-cell', isSelected && ['ayou-day-cell-selected', cellClass], { 'passive': day.isPassive }]"
+  <div :class="[
+    'ayou-day-cell',
+    customCellClass,
+    isSelected && [
+      'ayou-day-cell-selected',
+      cellSeletedClass,
+    ],
+    { 'passive': day.isPassive },
+  ]"
     @click.stop.prevent="handleDayClick()"
     :title="showLunar && lunarText"
   >
     <div class="day-wrapper">
-      <div class="lunar">
-        <template v-if="showLunar">{{lunarText}}</template>
+      <div class="top">
+        <template v-if="showLunar">
+          <div class="lunar">
+            {{lunarText}}
+          </div>
+        </template>
+        <div class="groupName">
+          {{cellGroupName}}
+        </div>
       </div>
       <div class="solar" :class="{
         'solar-selected': isSelected,
@@ -36,8 +51,14 @@
         type: String,
         default: 'ko'
       },
-      cellClass: {
+      cellSeletedClass: {
         type: String
+      },
+      customCellClass: {
+        type: String,
+      },
+      cellGroupName: {
+        type: String,
       }
     },
     mixins: [Transformer],
@@ -80,8 +101,10 @@
   .solar{ position: absolute; bottom: 0; right: 0; text-align: right; color: #797979; padding: 10px 5px 0px 0px; font-size: 23px; font-weight: 300; }
   .solar-selected{ color: #ffffff; }
   .passive{ color: #cccccc; opacity: 0.5; }
-  .lunar{ position: absolute; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; padding: 5px 3px; text-align: left; }
+  .lunar{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; color: #c8c8c8; margin: 5px 3px -2px; }
   .without-lunar{ margin-top: 1px; }
+  .groupName { font-size: 9px;  padding: 3px; color: #e9e9e9; }
+  .top { position: absolute; text-align: left; }
 
   @media (max-width: 320px) {
     .ayou-day-cell { width: 13.63%; }
