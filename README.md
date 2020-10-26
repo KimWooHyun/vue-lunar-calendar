@@ -56,7 +56,7 @@ new Vue({
   .cell {
     background-color: #222944;
   }
-</sryle>
+</style>
 ```
 
 # Props
